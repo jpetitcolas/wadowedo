@@ -33,11 +33,11 @@ var Player = function(socket) {
 Player.prototype.gather = function(resource) {
     var me = this;
 
-    setInterval(function() {
-        me.resources[resource.name] += resource.getHarvestedValue(player);
+    setTimeout(function() {
+        me.resources[resource.name] += resource.getHarvestedValue(me);
 
-        me.socket.broadcast.emit('gather', {name: resource.name, value: me.resources[resource.name]});
-    }, resource.getHarvestingTime(player));
+        me.socket.emit('gathering', {name: resource.name, value: me.resources[resource.name]});
+    }, resource.getHarvestingTime(me));
 };
 
 module.exports = Player;

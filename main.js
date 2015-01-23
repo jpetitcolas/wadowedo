@@ -3,7 +3,8 @@ var koaStatic = require('koa-static'),
     port = 3000;
 
 var app = module.exports = koa(),
-    player = require('./models/Player.js');
+    Player = require('./models/Player.js');
+
 app.use(koaStatic(__dirname + '/public'));
 
 // error catching
@@ -27,10 +28,6 @@ var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
     hub.register(new Player(socket));
-});
-
-io.on('message', function(message) {
-    console.log(message);
 });
 
 server.listen(3000);
