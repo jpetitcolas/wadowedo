@@ -2,7 +2,8 @@ var koa = require('koa');
 var koaStatic = require('koa-static'),
     port = 3000;
 
-var app = module.exports = koa();
+var app = module.exports = koa(),
+    player = require('models/Player.js');
 
 app.use(koaStatic(__dirname + '/public'));
 
