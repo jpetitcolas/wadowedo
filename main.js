@@ -28,6 +28,10 @@ var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
     hub.register(new Player(socket));
+
+    socket.on('chat:message', function(message) {
+        hub.message(message);
+    });
 });
 
 server.listen(3000);
