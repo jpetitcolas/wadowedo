@@ -12,6 +12,11 @@ body > .container-fluid {
     width: 100%;
 }
 /* */
+.actions a {
+	transition: background 1s ease-out;
+	background:white;
+}
 .actions a.in-progress {
 	background:linear-gradient(to left, gray, white);
 }
+	  
