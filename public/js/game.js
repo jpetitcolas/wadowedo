@@ -47,5 +47,17 @@ $('.actions a').click(function(e) {
 		    });
     	break;
     }
-    
+
+    socket.emit('harvest', 'wood');
+});
+
+socket.on('gathering', function(data){
+    var counter = $('#resource-' + data.name)[0];
+
+    od = new Odometer({
+        el: counter,
+        value: +counter.innerHTML
+    });
+
+    od.update(data.value);
 });

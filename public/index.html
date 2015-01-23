@@ -3,6 +3,7 @@
 <head>
     <title>Wadowedo</title>
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bower_components/odometer/themes/odometer-theme-minimal.css" rel="stylesheet">
     <link href="/style.css" rel="stylesheet">
 </head>
 <body>
@@ -29,11 +30,11 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a>Nourriture: <span id="food">30</span></a></li>
-                        <li><a>Bois: <span id="wood">30</span></a></li>
-                        <li><a>Terre: <span id="soil">30</span></a></li>
-                        <li><a>Pierre: <span id="stone">30</span></a></li>
-                        <li><a>Or: <span id="gold">30</span></a></li>
+                        <li><a>Nourriture: <span id="resource-food">0</span></a></li>
+                        <li><a>Bois: <span id="resource-wood">0</span></a></li>
+                        <li><a>Terre: <span id="resource-soil">0</span></a></li>
+                        <li><a>Pierre: <span id="resource-stone">0</span></a></li>
+                        <li><a>Or: <span id="resource-gold">0</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -56,6 +57,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/odometer/odometer.min.js"></script>
     <script src="/js/game.js"></script>
 </body>
 </html>

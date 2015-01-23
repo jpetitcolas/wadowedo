@@ -13,7 +13,7 @@ var Player = function(socket) {
     };
 
     this.skills = {
-        picking: 0
+        picking: 5
     };
 
     this.inventory = {
