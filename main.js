@@ -3,7 +3,7 @@ var koaStatic = require('koa-static'),
     port = 3000;
 
 var app = module.exports = koa(),
-    player = require('models/Player.js');
+    Player = require('./models/Player.js');
 
 app.use(koaStatic(__dirname + '/public'));
 
@@ -27,7 +27,7 @@ var server = require('http').createServer(app.callback());
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
-    hub.register(socket);
+    hub.register(new Player(socket));
 });
 
 server.listen(3000);
