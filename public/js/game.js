@@ -25,3 +25,4 @@ $('a[href="harvest-wood"]').click(function(e) {
     socket.on('gathering', function(data){
         console.info('ta bien bu', data);
     });
+});
