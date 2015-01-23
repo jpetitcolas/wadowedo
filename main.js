@@ -30,6 +30,10 @@ io.on('connection', function(socket) {
     hub.register(new Player(socket));
 });
 
+io.on('message', function(message) {
+    console.log(message);
+});
+
 server.listen(3000);
 
 console.info('server listening on port ' + port);
