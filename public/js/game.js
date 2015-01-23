@@ -18,11 +18,30 @@ socket.on('chat:message', function(message) {
     $(".chat").append('<p><strong>' + message.name + '</strong>: ' + message.message);
 });
 
-$('a[href="harvest-wood"]').click(function(e) {
+$('.actions a').click(function(e) {
     e.preventDefault();
-    socket.emit('harvest', 'wood');
+    switch(this.id) {
+    	case 'harvest-wood':
+			socket.emit('harvest', 'wood');
 
-    socket.on('gathering', function(data){
-        console.info('ta bien bu', data);
-    });
+		    socket.on('gathering', function(data){
+		        console.info('ta bien bu', data);
+		    });
+    	break;
+    	case 'harvest-stone':
+			socket.emit('harvest', 'stone');
+
+		    socket.on('gathering', function(data){
+		        console.info('Je ne vous jete pas la pierre', data);
+		    });
+    	break;
+    	case 'hunt':
+			socket.emit('hunt', 'biche');
+
+		    socket.on('gathering', function(data){
+		        console.info('Un sanglier', data);
+		    });
+    	break;
+    }
+    
 });
