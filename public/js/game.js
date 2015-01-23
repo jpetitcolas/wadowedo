@@ -14,8 +14,12 @@ $("#message-form").submit(function(e) {
     $(this).get(0).reset();
 });
 
-socket.on('chat:message', function(message) {
-    $(".chat").append('<p><strong>' + message.name + '</strong>: ' + message.message);
+var chat = $(".chat");
+socket.on('chat:message', function(messages) {
+    for (var i = 0, c = messages.length ; i < c ; i++) {
+        var message = messages[i];
+        chat.append('<p class="message"><strong>' + message.name + '</strong>: ' + message.message);
+    }
 });
 
 $('.actions a').click(function(e) {
