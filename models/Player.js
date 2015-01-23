@@ -31,13 +31,16 @@ var Player = function(socket) {
 };
 
 Player.prototype.gather = function(resource) {
-    var me = this;
+    var me = this,
+        time = resource.getHarvestingTime(me);
+
+    me.socket.emit('gatheringTime', time);
 
     setTimeout(function() {
         me.resources[resource.name] += resource.getHarvestedValue(me);
 
         me.socket.emit('gathering', {name: resource.name, value: me.resources[resource.name]});
-    }, resource.getHarvestingTime(me));
+    }, time);
 };
 
 module.exports = Player;
