@@ -21,6 +21,15 @@ app.use(function *(next) {
     }
 });
 
-app.listen(port);
+var hub = require('./lib/Hub')();
+var server = require('http').createServer(app.callback());
+var io = require('socket.io')(server);
+
+io.on('connection', function(socket) {
+    hub.register(socket);
+});
+
+server.listen(3000);
+
 console.info('server listening on port ' + port);
 console.info('Press CTRL+C to stop server');
