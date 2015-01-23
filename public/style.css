@@ -1,0 +1,13 @@
+body {
+    overflow: hidden;
+}
+
+body > .container-fluid {
+    padding: 0;
+}
+
+#message-form {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

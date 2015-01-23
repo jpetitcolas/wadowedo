@@ -4,7 +4,6 @@ var koaStatic = require('koa-static'),
 
 var app = module.exports = koa(),
     player = require('./models/Player.js');
-
 app.use(koaStatic(__dirname + '/public'));
 
 // error catching
@@ -27,7 +26,11 @@ var server = require('http').createServer(app.callback());
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
-    hub.register(socket);
+    hub.register(new Player(socket));
+});
+
+io.on('message', function(message) {
+    console.log(message);
 });
 
 server.listen(3000);

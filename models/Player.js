@@ -1,28 +1,43 @@
-module.exports = {
-    name: "Anonymous",
-    health: 50,
-    resources: {
+var Player = function(socket) {
+    this.name = "Anonymous";
+    this.socket = socket;
+
+    this.health = 50;
+
+    this.resources = {
         food: 50,
         wood: 0,
         stone: 0,
         gold: 0,
         soil: 0
-    },
-    skills: {
+    };
+
+    this.skills = {
         picking: 0
-    },
-    inventory: {
+    };
+
+    this.inventory = {
         axe: 0,
         pickaxe: 0,
         longbow: 0,
-        knife: 0
-    },
+        knife:0
+    };
 
-    gather: function(resource) {
-        var me = this;
+    var self = this;
 
-        setInterval(function() {
-            me.resources[resource.name] += resource.getHarvestedValue(player);
-        }, resource.getHarvestingTime(player));
-    }
+    socket.on('harvest', function(resourceName){
+        self.gather(require('./resources/' + resourceName));
+    });
 };
+
+Player.prototype.gather = function(resource) {
+    var me = this;
+
+    setInterval(function() {
+        me.resources[resource.name] += resource.getHarvestedValue(player);
+
+        me.socket.broadcast.emit('gather', {name: resource.name, value: me.resources[resource.name]});
+    }, resource.getHarvestingTime(player));
+};
+
+module.exports = Player;
