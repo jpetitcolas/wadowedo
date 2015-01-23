@@ -11,3 +11,7 @@ body > .container-fluid {
     bottom: 0;
     width: 100%;
 }
+/* */
+.actions a.in-progress {
+	background:linear-gradient(to left, gray, white);
+}
