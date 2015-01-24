@@ -13,7 +13,8 @@ function haveCapabilities(capabilities) {
     var playerCapabilities = {
         resources: player.resources,
         skills: player.skills,
-        inventory: player.inventory
+        inventory: player.inventory,
+        technologies: player.technologies
     };
 
     capabilities = 'playerCapabilities.' + capabilities;
