@@ -45,20 +45,37 @@
 </div>
 
 <!-- TRIBU -->
-<div class="panel panel-default actions">
+<div class="panel panel-default tribe">
 	<div class="panel-heading">
-		<h3 class="panel-title">Tribu</h3>
+		<h3 class="panel-title">Tribus</h3>
 	</div>
 	<div class="panel-body">
-		<ul class="nav navbar-nav navbar-right tribe-status">
-			<li id="display-tribe-info"><a>Tribu: <span class="current-tribe-name"></span></a></li>
-			<li id="choose-tribe"><a>Tribu</a></li>
-		</ul>
+		<div class="col-md-6">
+			<h5>Liste des tribus</h5>
+			<ul id="tribe-list"></ul>
+
+			<h5>Créer votre tribu</h5>
+			<form id="create-tribe">
+				<label for="tribe-name">Nom</label>
+				<input type="text" name="tribe-name" id="tribe-name"/>
+
+				<input class="btn" type="submit" value="Créer" />
+			</form>
+			<span id="tribe-creation-message"></span>
+		</div>
+
+		<div id="your-tribe" class="col-md-6">
+			<h3>Votre tribu : <span class="current-tribe-name"></span></h3>
+
+			<ul id="member-list"></ul>
+
+			<a id="leave-tribe" class="btn btn-default">Quitter la tribu</a>
+		</div>
 	</div>
 </div>
 
 <!-- INVENTAIRE -->
-<div class="panel panel-default actions">
+<div class="panel panel-default crafting">
 	<div class="panel-heading">
 		<h3 class="panel-title">Inventaire</h3>
 	</div>
@@ -78,7 +95,7 @@
 </div>
 
 <!-- ACTIONS -->
-<div class="panel panel-default crafting">
+<div class="panel panel-default actions">
 	<div class="panel-heading">
 		<h3 class="panel-title">Actions</h3>
 	</div>
