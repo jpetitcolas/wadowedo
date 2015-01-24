@@ -12,9 +12,9 @@ module.exports = {
         player.skills.lumberjacking += totalHarvestedWood ? Math.log(totalHarvestedWood) * config.skill.growth_factor : 0;
     },
 
-    getHarvestedValue: function(player) {
+    getHarvestedValue: function(player, tribe) {
         var harvestedPerSecond = 1 + player.skills.lumberjacking * config.skill.harvest_influence;
-        if (player.inventory.axe > 0) {
+        if (tribe.inventory.axe > 0) {
             harvestedPerSecond *= 1.5;
         }
 

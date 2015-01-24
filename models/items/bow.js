@@ -1,7 +1,7 @@
 module.exports = {
     name: 'bow',
     label: 'Arc',
-    requiresValidation: true,
+    requiresValidation: false,
     getRequiredResources: function() {
         return {
             'wood': 20
