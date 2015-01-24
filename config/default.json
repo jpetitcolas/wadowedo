@@ -1,4 +1,8 @@
 {
+    "events": {
+        "delay": 5000,
+        "probability": 0.5
+    },
     "skill": {
         "growth_factor": 0.0006,
         "harvest_influence": 2

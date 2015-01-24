@@ -12,7 +12,8 @@ function buildScripts() {
         './public/js/buttons.js',
         './public/js/buttons.js',
         './public/js/chat.js',
-        './public/js/tribe.js'
+        './public/js/tribe.js',
+        './public/js/events.js'
     ])
         .pipe(concat('main.js'))
         .pipe(gulp.dest('./public/dist/js/'))

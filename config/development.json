@@ -1,4 +1,8 @@
 {
+  "events": {
+    "delay": 1000,
+    "probability": 0.1
+  },
   "skill": {
     "growth_factor": 10
   }
