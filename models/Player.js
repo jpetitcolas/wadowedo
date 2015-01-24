@@ -63,18 +63,12 @@ Player.prototype.craft = function(item) {
         me.tribe.emitToAll('updateNewItem', item.name);
     }
 
-<<<<<<< Updated upstream
-    setTimeout(function() {
-        me.tribe.inventory[item.name]++;
-    }, item.getBuildingTime(me));
-=======
     if (typeof(me.inventory[item.name]) != 'undefined') {
         setTimeout(function() {
             me.inventory[item.name]++;
         }, item.getBuildingTime(me));        
     }
 
->>>>>>> Stashed changes
 };
 
 Player.prototype.sendNotification = function(message) {
