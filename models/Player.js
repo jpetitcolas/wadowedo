@@ -38,7 +38,7 @@ var Player = function(name, socket) {
 
     socket.on('crafting', function(objectName) {
         self.craft(require('./items/' + objectName));
-    })
+    });
 };
 
 Player.prototype.gather = function(resource) {

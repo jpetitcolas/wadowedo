@@ -57,3 +57,8 @@ $('.crafting a').click(function(e) {
     e.preventDefault();
     socket.emit('crafting', $(this).attr('href'));
 });
+
+displayFileIn('screens/main.html', $('#main-screen'));
+displayFileIn('navigation.html', $('#navigation'), function() {
+    handleTribeName();
+});
