@@ -49,7 +49,7 @@ $document.on('keydown', '#message', function() {
 
 $document.on('submit', '#message-form', function(e) {
     e.preventDefault();
-    var to = $("#chat-tabs li.active a").attr('href').split('-')[1];
+    var to = $('#chat-tabs li.active a').attr('href').split('-')[1];
     if (to === 'validation') {
         to = 'all';
     }
