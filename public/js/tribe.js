@@ -124,7 +124,7 @@ function updateTribeList() {
         item = name + ' (' + tribesWithPlayers[name].length + ')';
 
         if (name !== player.tribeName) {
-            item += ' - <a class="join-tribe" data-name="' + name + '">Rejoindre</a>';
+            item += '<a class="btn btn-default join-tribe" data-name="' + name + '">Rejoindre</a>';
         }
 
         list.append('<li class="tribe">' + item + '</li>');
