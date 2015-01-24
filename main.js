@@ -27,11 +27,13 @@ var server = require('http').createServer(app.callback());
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
-    hub.register(new Player(socket));
-    socket.on('chat:message', function(message) {
-        hub.message(message);
-    });});
+    var player = new Player(socket.handshake.query.login, socket);
+    hub.register(player);
 
+    socket.on('chat:message', function(message) {
+        hub.message(player, message);
+    });
+});
 
 server.listen(3000);
 

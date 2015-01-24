@@ -1,21 +1,13 @@
-var socket = io();
+var socket = io('', { query: window.location.search.substring(1) }),
+    player = {
+        skills: {},
+        inventory: {}
+    };
 
-$("#message").keydown(function() {
-    if (event.keyCode == 13) {
-        $(this.form).submit();
-        return false;
-    }
-});
-
-$("#message-form").submit(function(e) {
+$('.actions a').click(function(e) {
     e.preventDefault();
 
-    socket.emit('chat:message', $("#message").val());
-    $(this).get(0).reset();
-});
-
-socket.on('chat:message', function(message) {
-    $(".chat").append('<p><strong>' + message.name + '</strong>: ' + message.message);
+    socket.emit('harvest', $(this).attr('href'));
 });
 
 var disableButtons = function() {
@@ -59,5 +51,9 @@ $('.actions a').click(function(e) {
 		    });
     	break;
     }
+});
     
+$('.crafting a').click(function(e) {
+    e.preventDefault();
+    socket.emit('crafting', $(this).attr('href'));
 });

@@ -1,68 +1,19 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Wadowedo</title>
-    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/style.css" rel="stylesheet">
-    <link href="/ladda-themeless.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>WadoWedo, an Open World Simulator</title>
+    <link rel="stylesheet" href="/style.css"/>
 </head>
-<body>
-    <div class="container-fluid">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Brand</a>
-                </div>
-
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Compétences <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Chasse <span id="food">30</span></a></li>
-                                <li><a href="#">Survie <span id="food">30</span></a></li>
-                                <li><a href="#">Cueillette <span id="food">30</span></a></li>
-                                <li><a href="#">Forge <span id="food">30</span></a></li>
-                                <li><a href="#">Architecture <span id="food">30</span></a></li>
-                                <li><a href="#">Cuisine <span id="food">30</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> Nourriture: <span id="food">30</span></a></li>
-                        <li><a><span class="glyphicon glyphicon-tree-conifer" aria-hidden="true"></span> Bois: <span id="wood">30</span></a></li>
-                        <li><a>Terre: <span id="soil">30</span></a></li>
-                        <li><a>Pierre: <span id="stone">30</span></a></li>
-                        <li><a>Or: <span id="gold">30</span></a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div class="row">
-            <div class="col-md-9">
-                <div class="container-fluid actions">
-                    <a class="btn btn-primary ladda-button" href="harvest-wood" data-style="expand-left" data-size="l" role="button" id="harvest-wood" data-style="expand-left"  data-size="l" >Récolter du bois</a>
-                    <a class="btn btn-primary ladda-button" href="harvest-wood" role="button" id="harvest-wood" data-style="expand-left"  data-size="l" >Récolter du bois</a>
-                    <a class="btn btn-primary ladda-button" href="harvest-stone" data-style="expand-left" data-size="l" id="harvest-stone" role="button">Récolter de la pierre</a>
-                    <a class="btn btn-primary ladda-button" href="hunt" data-style="expand-left" data-size="l" data-skills="longbow,knife"  id="hunt" role="button"><span class="ladda-label">Chasser</span></a>
-                </div>
-            </div>
-            <div class="col-md-3 chat">
-                <p class="message"><strong>xXXKevDu92XXx:</strong> ki ve du boa?</p>
-                <p class="message"><strong>~~~~D4RKW4RR1OR~~~~</strong>moa lol mdr xpdr</p>
-            </div>
-        </div>        </div>
-        <form action="#" id="message-form">
-            <textarea class="form-control" name="message" id="message" cols="30" rows="5"></textarea>
+<body class="login">
+    <div class="container">
+        <form action="/game.html" method="GET">
+            <p class="form-group">
+                <label for="login">What is your name, adventurer?</label>
+                <input type="text" id="login" name="login" class="form-control big-one" />
+            </p>
         </form>
     </div>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/js/spin.min.js"></script>
-    <script src="/js/ladda.min.js"></script>
-    <script src="/js/game.js"></script>
+
 </body>
 </html>
