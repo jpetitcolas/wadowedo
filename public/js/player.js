@@ -16,8 +16,7 @@ var player = {
             value: +counter.innerHTML
         });
 
-        inprogress.stop();
-        //od.update(data.value);
+        od.update(data.value);
         updateButtonsStatus();
     });
 });

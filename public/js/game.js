@@ -16,7 +16,7 @@ function addButtonEvents () {
         disableButtons();
         inprogress = Ladda.create(this);
         inprogress.start();
-        enableButtons();
+        disableButtons();
         socket.emit('harvest', $(this).attr('href'));
     });
 

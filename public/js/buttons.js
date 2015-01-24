@@ -1,7 +1,11 @@
 /**
  * enable/disable buttons with a data-skills & data-inventory
  */
+
+ 
 function updateButtonsStatus() {
+    inprogress.stop();
+    enableButtons();
     function updateButtonStatus($button, type, data) {
         var requirements = data.split(','),
             requirementInfos,

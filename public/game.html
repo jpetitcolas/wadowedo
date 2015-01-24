@@ -4,8 +4,9 @@
     <title>Wadowedo</title>
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/bower_components/odometer/themes/odometer-theme-minimal.css" rel="stylesheet">
+    <link href="/css/ladda.css" rel="stylesheet">
+    <link href="/css/ladda-themeless.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/tribe.css" rel="stylesheet">
 </head>
 <body>
     <div class="container-fluid">
@@ -16,23 +17,9 @@
         </nav>
 
         <div class="row">
-
-            <div class="col-md-9">
-                <div class="container-fluid actions">
-                    <h3>Matières premières</h3>
-                    <a class="btn btn-primary ladda-button" href="wood" role="button">Récolter du bois</a>
-                    <a class="btn btn-primary ladda-button" href="stone" id="harvest-stone" role="button">Récolter de la pierre</a>
-                    <a class="btn btn-primary ladda-button" href="hunt" data-skills="longbow,knife" role="button">Chasser</a>
-                </div>
-
-                <div class="container-fluid crafting">
-                    <h3>Outils de base</h3>
-                    <a class="btn btn-primary ladda-button" href="axe" data-inventory="wood:50,stone:20" role="button">Construire hache</a>
-                    <a class="btn btn-primary ladda-button" href="bow" data-inventory="wood:50" role="button">Construire arc</a>
-                </div>
-            </div>
-            <div class="col-md-2 chat" id="chat"></div>
             <div class="col-md-9" id="main-screen"></div>
+            <div class="col-md-2 chat" id="chat"></div>
+            
         </div>
         <form action="#" id="message-form">
             <textarea class="form-control" name="message" id="message" cols="30" rows="5"></textarea>

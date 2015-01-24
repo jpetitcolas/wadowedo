@@ -1,12 +1,25 @@
+<div class="container-fluid health">
+    <h3>Santé</h3>
+	<div class="progress">
+	  <div id="energy" class="progress-bar progress-bar-energy" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+	    <span>Energie</span>
+	  </div>
+	</div>
+	<div class="progress">
+	  <div id="happiness" class="progress-bar progress-bar-happiness" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
+	    <span>Joie</span>
+	  </div>
+	</div>
+</div>
 <div class="container-fluid actions">
     <h3>Matières premières</h3>
-    <a class="btn btn-default" href="wood" role="button">Récolter du bois</a>
-    <a class="btn btn-default" href="stone" id="harvest-stone" role="button">Récolter de la pierre</a>
-    <a class="btn btn-default" href="hunt" data-skills="longbow,knife" role="button">Chasser</a>
+    <a class="btn btn-primary ladda-button" href="wood" role="button" data-style="expand-left"><span class="ladda-label">Récolter du bois</span></a>
+    <a class="btn btn-primary ladda-button" href="stone" id="harvest-stone" role="button" data-style="expand-left"><span class="ladda-label">Récolter de la pierre</span></a>
+    <a class="btn btn-primary ladda-button" href="hunt" data-skills="longbow,knife" role="button" data-style="expand-left"><span class="ladda-label">Chasser</span></a>
 </div>
 
 <div class="container-fluid crafting">
     <h3>Outils de base</h3>
-    <a class="btn btn-default" href="axe" data-inventory="wood:50,stone:20" role="button">Construire hache</a>
-    <a class="btn btn-default" href="bow" data-inventory="wood:50" role="button">Construire arc</a>
+    <a class="btn btn-primary ladda-button" href="axe" data-inventory="wood:50,stone:20" role="button" data-style="expand-left"><span class="ladda-label">Construire hache</span></a>
+    <a class="btn btn-primary ladda-button" href="bow" data-inventory="wood:50" role="button" data-style="expand-left"><span class="ladda-label">Construire arc</span></a>
 </div>
