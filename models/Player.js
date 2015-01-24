@@ -24,7 +24,7 @@ var Player = function(name, socket) {
     };
 
     this.inventory = {
-        axe: 1,
+        axe: 0,
         pickaxe: 0,
         bow: 0,
         knife:0
@@ -68,6 +68,7 @@ Player.prototype.craft = function(item) {
 
         me.resources[type] -= requiredResources[type];
         me.socket.emit('building:resources', { name: type, value: me.resources[type] });
+        me.socket.emit('newItem', item.name);
     }
 
     setTimeout(function() {

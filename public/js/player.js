@@ -8,6 +8,7 @@ var player = {
 
 ['gathering', 'building:resources'].forEach(function(event) {
     socket.on(event, function(data) {
+        console.log(data);
         var counter = $('#resource-' + data.name)[0];
         player.inventory[data.name] = +data.value;
 
@@ -20,6 +21,7 @@ var player = {
         updateButtonsStatus();
     });
 });
+
 
 socket.on('skills', function(skills){
     var skillName,
@@ -39,4 +41,21 @@ socket.on('skills', function(skills){
         od.update(skills[skillName]);
 
     }
+});
+
+
+socket.on('newItem', function(newItem){
+    updateButtonsStatus();
+
+    player.inventory[newItem] = (typeof(player.inventory[newItem]) != 'undefined') 
+                                    ? player.inventory[newItem]++ 
+                                    : 1 ;
+    
+    var counter = $("#"+newItem)[0];
+    
+    od = new Odometer({
+        el: counter,
+        value: +counter.innerHTML
+    });
+    od.update(player.inventory[newItem]);
 });
