@@ -70,7 +70,7 @@ socket.on('updateResources', function(resources) {
 
     for(resourceName in resources) {
         resourceCounter = $('#resource-' + resourceName)[0];
-
+console.log(resourceName);
         od = new Odometer({
             el: resourceCounter,
             value: +resourceCounter.innerHTML
