@@ -33,6 +33,18 @@ $document.on('click', '#leave-tribe', function (event) {
     leaveTribe(player.tribeName);
 });
 
+$document.on('click', '.promote-member', function (event) {
+    event.preventDefault();
+
+    promoteMember($(event.target).data('name'));
+});
+
+$document.on('click', '.deprive-member', function (event) {
+    event.preventDefault();
+
+    depriveMember($(event.target).data('name'));
+});
+
 function createTribe(name) {
     socket.emit('createTribe', name);
 }
@@ -43,6 +55,14 @@ function joinTribe(name) {
 
 function leaveTribe(name) {
     socket.emit('leaveTribe', name);
+}
+
+function promoteMember(playerName) {
+    socket.emit('promoteMember', {tribeName: player.tribeName, playerName: playerName});
+}
+
+function depriveMember(playerName) {
+    socket.emit('depriveMember', {tribeName: player.tribeName, playerName: playerName});
 }
 
 function handleTribeName() {
@@ -78,6 +98,17 @@ function displayTribeMembers() {
         }else if(member.isSubChief) {
             classNames = 'subchief';
         }
+
+        if (player.name !== member.name && (player.isChief || player.isSubChief)) {
+            if (!member.isChief || !member.isSubChief) {
+                name += ' - <a class="promote-member" data-name="' + member.name + '">Promouvoir</a>'
+            }
+
+            if (member.isSubChief) {
+                name += ' - <a class="deprive-member" data-name="' + member.name + '">Déchoir</a>'
+            }
+        }
+
 
         list.append('<li class="'+classNames+'">' + name + '</li>');
     }
@@ -150,6 +181,14 @@ socket.on('becomeChief', function() {
     player.isChief = true;
 });
 
+socket.on('becomeSubChief', function() {
+    player.isSubChief = true;
+});
+
 socket.on('leaveChiefPosition', function() {
     player.isChief = false;
+});
+
+socket.on('leaveSubChiefPosition', function() {
+    player.isSubChief = false;
 });

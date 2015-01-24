@@ -14,3 +14,7 @@
     font-weight: 400;
     color: #C09853;
 }
+
+#member-list .promote-member, #member-list .deprive-member {
+    cursor: pointer;
+}

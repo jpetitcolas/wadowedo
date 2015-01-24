@@ -48,13 +48,7 @@ var Tribe = function(name) {
             shouldDelete;
 
         // Remove from subchiefs
-        for (var i in this.subchiefs) {
-            player = this.subchiefs[i];
-
-            if (player.name === currentPlayer.name) {
-                this.subchiefs.splice(i, 1);
-            }
-        }
+        this.removeFromSubChiefs(currentPlayer);
 
         // Remove from player
         for (var i in this.players) {
@@ -80,6 +74,32 @@ var Tribe = function(name) {
         }
 
         return shouldDelete;
+    };
+
+    this.promote = function(player) {
+        player.isSubChief = true;
+        this.subchiefs.push(player);
+
+        this.chief.socket.emit('becomeSubChief');
+    };
+
+    this.deprive = function(player) {
+        player.isSubChief = false;
+        this.removeFromSubChiefs(player);
+
+        this.chief.socket.emit('leaveSubChiefPosition');
+    };
+
+    this.removeFromSubChiefs = function(currentPlayer) {
+        var player;
+
+        for (var i in this.subchiefs) {
+            player = this.subchiefs[i];
+
+            if (player.name === currentPlayer.name) {
+                this.subchiefs.splice(i, 1);
+            }
+        }
     };
 
     this.nominateNextChef = function() {
