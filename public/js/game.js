@@ -4,21 +4,21 @@ var socket = io(),
         inventory: {}
     };
 
-$("#message").keydown(function() {
+$('#message').keydown(function() {
     if (event.keyCode == 13) {
         $(this.form).submit();
         return false;
     }
 });
 
-$("#message-form").submit(function(e) {
+$('#message-form').submit(function(e) {
     e.preventDefault();
 
-    socket.emit('chat:message', $("#message").val());
+    socket.emit('chat:message', $('#message').val());
     $(this).get(0).reset();
 });
 
-var chat = $(".chat");
+var chat = $('.chat');
 socket.on('chat:message', function(messages) {
     for (var i = 0, c = messages.length ; i < c ; i++) {
         var message = messages[i];
@@ -42,12 +42,15 @@ $('.crafting a').click(function(e) {
 ['gathering', 'building:resources'].forEach(function(event) {
     socket.on(event, function(data) {
         var counter = $('#resource-' + data.name)[0];
+        player.inventory[data.name] = +data.value;
+
         od = new Odometer({
             el: counter,
             value: +counter.innerHTML
         });
 
         od.update(data.value);
+        updateButtonsStatus();
     });
 });
 
@@ -56,6 +59,7 @@ socket.on('skills', function(skills){
         skillCounter;
 
     player.skills = skills;
+    updateButtonsStatus();
 
     for(skillName in skills) {
         skillCounter = $('#skill-' + skillName)[0];
@@ -69,21 +73,35 @@ socket.on('skills', function(skills){
     }
 });
 
+/**
+ * enable/disable buttons with a data-skills & data-inventory
+ */
 function updateButtonsStatus() {
     function updateButtonStatus($button, type, data) {
-        var requirements = data.split(',');
+        var requirements = data.split(','),
+            requirementInfos,
+            enabled = true,
+            name,
+            value;
 
         for(var i in requirements) {
+            requirementInfos = requirements[i].split(':');
+            name = requirementInfos[0];
+            value = +requirementInfos[1];
 
+            enabled = enabled && player[type][name] >= value;
         }
+
+        $button.attr('disabled', enabled ? null: 'disabled');
     }
 
-    $('*[data-inventory]').each(function(button) {
-        updateButtonStatus($(button), 'inventory', $(button).attr('data-inventory'));
+    $('*[data-inventory]').each(function(index, button) {
+        updateButtonStatus($(button), 'inventory', $(button).data('inventory'));
     });
 
-    $('*[data-skills]').each(function(button) {
-        updateButtonStatus($(button), 'skills', $(button).attr('data-skills'));
+    $('*[data-skills]').each(function(index, button) {
+        updateButtonStatus($(button), 'skills', $(button).data('skills'));
     });
 }
 
+updateButtonsStatus();
