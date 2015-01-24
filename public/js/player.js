@@ -7,21 +7,27 @@ var player = {
     isSubChief: false
 };
 
-['gathering', 'building:resources'].forEach(function(event) {
-    socket.on(event, function(data) {
-        var counter = $('#resource-' + data.name)[0];
-        player.inventory[data.name] = +data.value;
-
-        od = new Odometer({
-            el: counter,
-            value: +counter.innerHTML
-        });
-
-        od.update(data.value);
-        updateButtonsStatus();
+function updateCounter(counter, value) {
+    od = new Odometer({
+        el: counter[0],
+        value: +counter[0].innerHTML
     });
+
+    od.update(value);
+    updateButtonsStatus();
+}
+
+socket.on('building:resources', function(data) {
+    player.inventory[data.name] = +data.value;
+
+    updateCounter($('#resource-' + data.name), +data.value)
 });
 
+socket.on('gathering', function(data) {
+    player.resources[data.name] = +data.value;
+
+    updateCounter($('#resource-' + data.name), +data.value)
+});
 
 socket.on('updateSkills', function(skills){
     var skillName,
@@ -48,7 +54,7 @@ socket.on('updateSkills', function(skills){
 socket.on('updateNewItem', function(newItem){
     updateButtonsStatus();
     player.inventory[newItem] = (typeof(player.inventory[newItem]) != 'undefined')
-                                ? player.inventory[newItem]++ 
+                                ? player.inventory[newItem]++
                                 : 1 ;
 
     var counter = $("#"+newItem)[0];

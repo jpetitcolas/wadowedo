@@ -1,6 +1,6 @@
 module.exports = {
     name: 'pickaxe',
-
+    requiresValidation: true,
     getRequiredResources: function() {
         return {
             'wood': 25,

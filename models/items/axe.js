@@ -1,5 +1,6 @@
 module.exports = {
     name: 'axe',
+    requiresValidation: false,
     getRequiredResources: function() {
         return {
             'wood': 25,

@@ -4,7 +4,7 @@ var Player = function(name, socket) {
 
     this.health = 50;
 
-    this.tribeName = null;
+    this.tribe = null;
     this.isChief = false;
     this.isSubChief = false;
 
@@ -68,9 +68,13 @@ Player.prototype.gather = function(resource) {
 };
 
 Player.prototype.craft = function(item) {
-    var me = this;
+    if (this.tribe && item.requiresValidation) {
+        return this.sendNotification('La construction de cet object requiert la valition des chefs de la tribu, la demande est partie.');
+    }
 
-    var requiredResources = item.getRequiredResources();
+    var me = this,
+        requiredResources = item.getRequiredResources();
+
     for (var type in requiredResources) {
         if (!requiredResources.hasOwnProperty(type)) {
             continue;
@@ -84,6 +88,14 @@ Player.prototype.craft = function(item) {
     setTimeout(function() {
         me.inventory[item.name]++;
     }, item.getBuildingTime(me));
+};
+
+Player.prototype.sendNotification = function(message) {
+    this.socket.emit('chat:message', [{
+        time: new Date().toISOString(),
+        name: 'Wadowedo',
+        message: message
+    }]);
 };
 
 module.exports = Player;
