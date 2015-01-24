@@ -1,6 +1,9 @@
 var player = {
     skills: {},
-    inventory: {}
+    inventory: {},
+    tribeName: null,
+    tribeParticipation: {
+    }
 };
 
 ['gathering', 'building:resources'].forEach(function(event) {
