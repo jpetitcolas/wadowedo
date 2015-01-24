@@ -22,7 +22,8 @@ app.use(function *(next) {
     }
 })
 
-var hub = require('./lib/Hub')();
+var eventEngine = require('./lib/EventEngine')();
+var hub = require('./lib/Hub')(eventEngine);
 var server = require('http').createServer(app.callback());
 var io = require('socket.io')(server);
 
@@ -44,8 +45,6 @@ io.on('connection', function(socket) {
         hub.message(player, message);
     });
 });
-
-(require('./lib/EventEngine')()).start(hub);
 
 server.listen(port);
 
