@@ -33,7 +33,8 @@ socket.on('skills', function(skills){
 
         od = new Odometer({
             el: skillCounter,
-            value: +skillCounter.innerHTML
+            value: +skillCounter.innerHTML,
+            format: '(,ddd)'
         });
 
         od.update(skills[skillName]);

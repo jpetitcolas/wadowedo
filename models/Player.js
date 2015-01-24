@@ -4,6 +4,10 @@ var Player = function(name, socket) {
 
     this.health = 50;
 
+    this.totalHarvestedResources = {
+        wood: 0
+    };
+
     this.resources = {
         food: 50,
         wood: 0,
@@ -50,9 +54,13 @@ Player.prototype.gather = function(resource) {
     setTimeout(function() {
         resource.updateSkills(me);
 
-        me.resources[resource.name] += resource.getHarvestedValue(me);
+        var harvestedValue = Math.round(resource.getHarvestedValue(me));
+        me.resources[resource.name] += harvestedValue;
+        if (me.totalHarvestedResources.hasOwnProperty(resource.name)) {
+            me.totalHarvestedResources[resource.name] += harvestedValue;
+        }
 
-        me.socket.emit('gathering', {name: resource.name, value: me.resources[resource.name]});
+        me.socket.emit('gathering', { name: resource.name, value: me.resources[resource.name] });
         me.socket.emit('skills', me.skills);
     }, time);
 };
