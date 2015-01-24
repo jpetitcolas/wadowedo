@@ -74,3 +74,13 @@ socket.on('updateResources', function(resources) {
         od.update(resources[resourceName]);
     }
 });
+
+socket.on('updateInventory', function(inventory) {
+    $("#tools span").each(function(index, itemCount) {
+        if (!inventory.hasOwnProperty(itemCount.id)) {
+            return;
+        }
+
+        $(this).text(inventory[itemCount.id]);
+    });
+});
