@@ -2,6 +2,7 @@ var player = {
     health:{},
     skills: {},
     inventory: {},
+    technologies: {},
     resources: {},
     tribeName: null,
     isChief: false,
@@ -56,18 +57,10 @@ socket.on('updateEnergy', function(energy){
 });
 
 
-socket.on('updateNewItem', function(newItem){
+socket.on('updateNewItem', function(techno){
     updateButtonsStatus();
-    player.inventory[newItem] = (typeof(player.inventory[newItem]) != 'undefined')
-                                ? player.inventory[newItem]++
-                                : 1 ;
-
-    var counter = $("#"+newItem)[0];
-    od = new Odometer({
-        el: counter,
-        value: +counter.innerHTML
-    });
-    od.update(player.inventory[newItem]);
+    player.technologies[techno] =  1;
+    updateTechnologiesButtonStatus();
 });
 
 socket.on('updateResources', function(resources) {

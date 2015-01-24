@@ -42,4 +42,14 @@ function updateButtonsStatus() {
     });
 }
 
+function updateTechnologiesButtonStatus() {
+    $(".crafting .btn").each(function() {
+        var $button = $(this);
+        if (player.technologies.hasOwnProperty($button.attr('href'))) {
+            $button.attr('disabled', true).addClass('learned');
+        }
+        
+    });
+}
+
 updateButtonsStatus();
