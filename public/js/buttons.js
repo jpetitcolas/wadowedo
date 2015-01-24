@@ -10,7 +10,6 @@ var enableButtons = function() {
 };
 
 function updateButtonsStatus() {
-
     enableButtons();
     if (typeof(inprogress) != 'undefined') {
         inprogress.stop();

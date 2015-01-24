@@ -39,7 +39,6 @@ socket.on('updateSkills', function(skills){
         });
 
         od.update(skills[skillName]);
-
     }
 });
 
@@ -47,13 +46,11 @@ socket.on('updateSkills', function(skills){
 
 socket.on('updateNewItem', function(newItem){
     updateButtonsStatus();
-
     player.inventory[newItem] = (typeof(player.inventory[newItem]) != 'undefined')
-                                ? player.inventory[newItem]++
+                                ? player.inventory[newItem]++ 
                                 : 1 ;
 
     var counter = $("#"+newItem)[0];
-
     od = new Odometer({
         el: counter,
         value: +counter.innerHTML
@@ -76,5 +73,4 @@ socket.on('updateResources', function(resources) {
 
         od.update(resources[resourceName]);
     }
-
 });

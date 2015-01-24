@@ -78,7 +78,7 @@ Player.prototype.craft = function(item) {
     }
 
     setTimeout(function() {
-        me.inventory.bow++;
+        me.inventory[item.name]++;
     }, item.getBuildingTime(me));
 };
 
