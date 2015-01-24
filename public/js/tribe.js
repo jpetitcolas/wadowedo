@@ -28,12 +28,6 @@ $document.on('click', '#tribe-list .join-tribe', function (event) {
     joinTribe($(event.target).data('name'));
 });
 
-$document.on('click', '#leave-tribe', function (event) {
-    event.preventDefault();
-
-    leaveTribe(player.tribeName);
-});
-
 $document.on('click', '.promote-member', function (event) {
     event.preventDefault();
 
@@ -52,10 +46,6 @@ function createTribe(name) {
 
 function joinTribe(name) {
     socket.emit('joinTribe', name);
-}
-
-function leaveTribe(name) {
-    socket.emit('leaveTribe', name);
 }
 
 function promoteMember(playerName) {
@@ -164,14 +154,6 @@ socket.on('createTribeResult', function(result) {
 
 socket.on('joinTribeResult', function(tribeName) {
     player.tribeName = tribeName;
-    handleTribeName();
-
-    socket.emit('retrieveTribes');
-});
-
-socket.on('leaveTribeResult', function() {
-    player.tribeName = null;
-    player.tribeParticipation = {};
     handleTribeName();
 
     socket.emit('retrieveTribes');
