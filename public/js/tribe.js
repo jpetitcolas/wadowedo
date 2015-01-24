@@ -6,6 +6,7 @@ $document.on('click', '.tribe-status', function() {
     displayFileIn('screens/tribe.html', $('#main-screen'), function() {
         updateTribeList();
         handleTribeName();
+        displayTribeMembers();
     });
 });
 
@@ -109,7 +110,6 @@ function displayTribeMembers() {
             }
         }
 
-
         list.append('<li class="'+classNames+'">' + name + '</li>');
     }
 }
@@ -191,4 +191,12 @@ socket.on('leaveChiefPosition', function() {
 
 socket.on('leaveSubChiefPosition', function() {
     player.isSubChief = false;
+});
+
+socket.on('updateTribe', function(tributeData) {
+    player.tribeName = tributeData.tribeName;
+    player.isChief = tributeData.isChief;
+    player.isSubChief = tributeData.isSubChief;
+
+    handleTribeName();
 });

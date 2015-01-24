@@ -1,6 +1,7 @@
 var player = {
     skills: {},
     inventory: {},
+    resources: {},
     tribeName: null,
     isChief: false,
     isSubChief: false

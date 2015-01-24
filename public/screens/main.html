@@ -15,12 +15,13 @@
     <h3>Actions élémentaires</h3>
     <a class="btn btn-primary ladda-button" href="wood" role="button" data-style="expand-left"><span class="ladda-label">Récolter du bois</span></a>
     <a class="btn btn-primary ladda-button" href="stone" id="harvest-stone" role="button" data-style="expand-left"><span class="ladda-label">Récolter de la pierre</span></a>
-    <a class="btn btn-primary ladda-button" href="hunt" data-skills="longbow,knife" role="button" data-style="expand-left"><span class="ladda-label">Chasser</span></a>
+    <a class="btn btn-primary ladda-button" href="hunt" data-enabled="inventory.longbow>=1||inventory.knife>=1" role="button" data-style="expand-left"><span class="ladda-label">Chasser</span></a>
 </div>
 
 <div class="container-fluid crafting">
     <h3>Construire un outil</h3>
-    <a class="btn btn-primary ladda-button" href="axe" data-inventory="wood:25,stone:5" role="button" data-style="expand-left"><span class="ladda-label">Hache</span></a>
-    <a class="btn btn-primary ladda-button" href="pickaxe" data-inventory="wood:25,stone:125" role="button" data-style="expand-left"><span class="ladda-label">Pioche</span></a>
-    <a class="btn btn-primary ladda-button" href="bow" data-inventory="wood:20" role="button" data-style="expand-left"><span class="ladda-label">Arc</span></a>
+
+    <a class="btn btn-primary ladda-button" href="axe" data-inventory="resources.wood>=25 && resources.stone>=5" role="button" data-style="expand-left"><span class="ladda-label">Hache</span></a>
+    <a class="btn btn-primary ladda-button" href="pickaxe" data-inventory="resources.wood=>25 && resources.stone:125" role="button" data-style="expand-left"><span class="ladda-label">Pioche</span></a>
+    <a class="btn btn-primary ladda-button" href="bow" data-inventory="resources.wood>=20" role="button" data-style="expand-left"><span class="ladda-label">Arc</span></a>
 </div>
