@@ -38,7 +38,7 @@ function updateButtonsStatus() {
         $button.attr('disabled', enabled ? null: 'disabled');
     }
 
-    $('[data-enabled]').each(function(index, button) {
+    $('.actions [data-enabled]').each(function(index, button) {
         updateButtonStatus($(button));
     });
 }
