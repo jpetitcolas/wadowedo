@@ -28,9 +28,6 @@ function haveCapabilities(capabilities) {
 
 function updateButtonsStatus() {
     enableButtons();
-    if (typeof(inprogress) != 'undefined') {
-        inprogress.stop();
-    }
 
     function updateButtonStatus($button) {
         var enabled = haveCapabilities($button.data('enabled'));
@@ -48,9 +45,12 @@ function updateTechnologiesButtonStatus() {
         var $button = $(this);
         if (player.technologies.hasOwnProperty($button.attr('href'))) {
             $button.attr('disabled', true).addClass('learned');
+        } else {
+            $button.attr('disabled', false);
         }
         
     });
 }
-updateTechnologiesButtonStatus();
+
 updateButtonsStatus();
+updateTechnologiesButtonStatus();
