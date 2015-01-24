@@ -45,26 +45,6 @@ function leaveTribe(name) {
     socket.emit('leaveTribe', name);
 }
 
-function updateTribeParticipation() {
-    player.tribeParticipation = {
-        wood: $('#participation-wood').val()
-    }
-}
-
-function displayTribeMembers() {
-    var list = $('#member-list'),
-        members = tribesWithPlayers[player.tribeName];
-
-    // Remove old
-    $('li', list).each(function(index, li) {
-        $(li).remove();
-    });
-
-    for (var i in members) {
-        list.append('<li>' + members[i] + '</li>');
-    }
-}
-
 function handleTribeName() {
     if (player.tribeName) {
         $('.current-tribe-name').html(player.tribeName);
@@ -73,6 +53,33 @@ function handleTribeName() {
     } else {
         $('#display-tribe-info, #your-tribe').hide();
         $('#choose-tribe').show();
+    }
+}
+
+function displayTribeMembers() {
+    var list = $('#member-list'),
+        members = tribesWithPlayers[player.tribeName],
+        classNames,
+        member,
+        name;
+
+    // Remove old
+    $('li', list).each(function(index, li) {
+        $(li).remove();
+    });
+
+    for (var i in members) {
+        member = members[i];
+        name = member.name;
+        classNames = '';
+
+        if(member.isChief) {
+            classNames = 'chief';
+        }else if(member.isSubChief) {
+            classNames = 'subchief';
+        }
+
+        list.append('<li class="'+classNames+'">' + name + '</li>');
     }
 }
 
@@ -105,7 +112,9 @@ function updateTribeList() {
 
 socket.on('tribeList', function(allTribes) {
     tribesWithPlayers = allTribes;
+
     updateTribeList();
+    displayTribeMembers();
 });
 
 socket.on('createTribeResult', function(result) {
@@ -117,7 +126,6 @@ socket.on('createTribeResult', function(result) {
         handleTribeName();
 
         socket.emit('retrieveTribes');
-        updateParticipationForm();
     }
 
     tribeNameInput.val('');
@@ -126,7 +134,6 @@ socket.on('createTribeResult', function(result) {
 socket.on('joinTribeResult', function(tribeName) {
     player.tribeName = tribeName;
     handleTribeName();
-    updateParticipationForm();
 
     socket.emit('retrieveTribes');
 });
@@ -135,7 +142,14 @@ socket.on('leaveTribeResult', function() {
     player.tribeName = null;
     player.tribeParticipation = {};
     handleTribeName();
-    updateParticipationForm();
 
     socket.emit('retrieveTribes');
+});
+
+socket.on('becomeChief', function() {
+    player.isChief = true;
+});
+
+socket.on('leaveChiefPosition', function() {
+    player.isChief = false;
 });

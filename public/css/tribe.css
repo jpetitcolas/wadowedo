@@ -5,3 +5,12 @@
 #tribe-list .join-tribe {
     cursor: pointer;
 }
+
+#member-list .chief {
+    font-weight: bold;
+    color: #cc0000;
+}
+#member-list .subchief {
+    font-weight: 400;
+    color: #C09853;
+}

@@ -3,6 +3,8 @@ var Player = function(name, socket) {
     this.socket = socket;
 
     this.health = 50;
+    this.isChief = false;
+    this.isSubChief = false;
 
     this.totalHarvestedResources = {
         wood: 0
@@ -34,14 +36,6 @@ var Player = function(name, socket) {
         knife:0
     };
 
-    this.tribeParticipation = {
-        food: 0,
-        wood: 0,
-        stone: 0,
-        gold: 0,
-        soil: 0
-    };
-
     var self = this;
 
     socket.on('harvest', function(resourceName){
@@ -51,6 +45,12 @@ var Player = function(name, socket) {
     socket.on('crafting', function(objectName) {
         self.craft(require('./items/' + objectName));
     });
+};
+
+Player.prototype.clearResources = function() {
+    for(var i in this.resources) {
+        this.resources[i] = 0;
+    }
 };
 
 Player.prototype.gather = function(resource) {
@@ -68,8 +68,8 @@ Player.prototype.gather = function(resource) {
             me.totalHarvestedResources[resource.name] += harvestedValue;
         }
 
-        me.socket.emit('gathering', { name: resource.name, value: me.resources[resource.name] });
-        me.socket.emit('skills', me.skills);
+        me.socket.emit('gathering', {name: resource.name, value: me.resources[resource.name]});
+        me.socket.emit('updateSkills', me.skills);
     }, time);
 };
 

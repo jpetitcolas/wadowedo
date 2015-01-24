@@ -2,8 +2,8 @@ var player = {
     skills: {},
     inventory: {},
     tribeName: null,
-    tribeParticipation: {
-    }
+    isChief: false,
+    isSubChief: false
 };
 
 ['gathering', 'building:resources'].forEach(function(event) {
@@ -21,7 +21,7 @@ var player = {
     });
 });
 
-socket.on('skills', function(skills){
+socket.on('updateSkills', function(skills){
     var skillName,
         skillCounter;
 
@@ -39,5 +39,23 @@ socket.on('skills', function(skills){
 
         od.update(skills[skillName]);
 
+    }
+});
+
+socket.on('updateResources', function(resources) {
+    var resourceCounter;
+
+    player.resources = resources;
+    updateButtonsStatus();
+
+    for(resourceName in resources) {
+        resourceCounter = $('#resource-' + resourceName)[0];
+
+        od = new Odometer({
+            el: resourceCounter,
+            value: +resourceCounter.innerHTML
+        });
+
+        od.update(resources[resourceName]);
     }
 });
