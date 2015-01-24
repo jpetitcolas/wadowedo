@@ -6,6 +6,6 @@ module.exports = {
         return player.skills.picking * 5 + player.inventory.pickaxe * 15;
     },
     getHarvestingTime: function(player) {
-        return 1000 - (player.skills.picking * 5 + player.inventory.pickaxe * 15);
+        return 2000 - (player.skills.picking * 5 + player.inventory.pickaxe * 15);
     }
 };

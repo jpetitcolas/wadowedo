@@ -36,8 +36,8 @@ var Player = function(name, socket) {
         self.gather(require('./resources/' + resourceName));
     });
 
-    socket.on('build', function(objectName) {
-        self.build(require('./items/' + objectName));
+    socket.on('crafting', function(objectName) {
+        self.craft(require('./items/' + objectName));
     })
 };
 
@@ -57,7 +57,7 @@ Player.prototype.gather = function(resource) {
     }, time);
 };
 
-Player.prototype.build = function(item) {
+Player.prototype.craft = function(item) {
     var me = this;
 
     var requiredResources = item.getRequiredResources();

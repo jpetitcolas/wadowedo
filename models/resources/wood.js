@@ -9,7 +9,7 @@ module.exports = {
             + player.inventory.axe * 30 ;
     },
     getHarvestingTime: function(player) {
-        return 1000 - (
+        return 2000 - (
                 player.skills.picking * 80
                 + player.skills.lumberjacking * 10
                 + player.inventory.axe * 30
