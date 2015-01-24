@@ -1,4 +1,5 @@
 var player = {
+    health:{},
     skills: {},
     inventory: {},
     tribeName: null,
@@ -8,7 +9,6 @@ var player = {
 
 ['gathering', 'building:resources'].forEach(function(event) {
     socket.on(event, function(data) {
-        console.log(data);
         var counter = $('#resource-' + data.name)[0];
         player.inventory[data.name] = +data.value;
 
@@ -45,6 +45,11 @@ socket.on('updateSkills', function(skills){
 });
 
 
+socket.on('updateEnergy', function(energy){
+    player.health['energy'] = energy;
+
+});
+
 
 socket.on('updateNewItem', function(newItem){
     updateButtonsStatus();
@@ -70,7 +75,7 @@ socket.on('updateResources', function(resources) {
 
     for(resourceName in resources) {
         resourceCounter = $('#resource-' + resourceName)[0];
-console.log(resourceName);
+
         od = new Odometer({
             el: resourceCounter,
             value: +resourceCounter.innerHTML

@@ -31,6 +31,14 @@ $document.on('click', '.actions a', function(e) {
     socket.emit('harvest', $(this).attr('href'));
 });
 
+$document.on('click', '#eat', function(e) {
+    e.preventDefault();
+    inprogress = Ladda.create(this);
+    inprogress.start();
+    disableButtons();
+    socket.emit('eat', $(this).attr('href'));
+});
+
 $document.on('click', '.crafting a', function(e) {
     e.preventDefault();
     inprogress = Ladda.create(this);
@@ -45,6 +53,5 @@ displayFileIn('screens/main.html', $('#main-screen'), function() {
 });
 displayFileIn('navigation.html', $('#navigation'), function() {
     $('#player-name').html(player.name);
-
     handleTribeName();
 });
