@@ -32,6 +32,12 @@ Player.prototype.gather = function(resource) {
 
     // Init currently crafting resource
     if (!me.tribe.currentCraftingClicks.resources.hasOwnProperty(resource.name)) {
+        // Ask for a leader if the item requires a validation
+        if (this.tribe && resource.requiresValidation && !this.isChief && !this.isSubChief) {
+            this.tribe.submitCreation(this, resource, 'actions');
+            return this.sendNotification('La construction de l\'object "' + resource.label + '" requiert la valition des chefs de la tribu, la demande est partie.');
+        }
+
         me.tribe.currentCraftingClicks.resources[resource.name] = 0;
     }
 
@@ -60,17 +66,17 @@ Player.prototype.gather = function(resource) {
 };
 
 Player.prototype.craft = function(item) {
-    // Ask for a leader if the item requires a validation
-    if (this.tribe && item.requiresValidation && !this.isChief && !this.isSubChief) {
-        this.tribe.submitCrafting(this, item);
-        return this.sendNotification('La construction de l\'object "' + item.label + '" requiert la valition des chefs de la tribu, la demande est partie.');
-    }
-
     var me = this,
         requiredResources;
 
     // Init currently crafting resource
     if (!me.tribe.currentCraftingClicks.items.hasOwnProperty(item.name)) {
+        // Ask for a leader if the item requires a validation
+        if (this.tribe && item.requiresValidation && !this.isChief && !this.isSubChief) {
+            this.tribe.submitCreation(this, item, 'crafting');
+            return this.sendNotification('La construction de l\'object "' + item.label + '" requiert la valition des chefs de la tribu, la demande est partie.');
+        }
+
         me.tribe.currentCraftingClicks.items[item.name] = 0;
 
         // Decrement tribe resources for this item

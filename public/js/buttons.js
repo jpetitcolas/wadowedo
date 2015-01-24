@@ -35,20 +35,21 @@ function updateButtonsStatus() {
         $button.attr('disabled', enabled ? null: 'disabled');
     }
 
-    $('.actions [data-enabled]').each(function(index, button) {
+    $('[data-enabled]').each(function(index, button) {
         updateButtonStatus($(button));
     });
 }
 
 function updateTechnologiesButtonStatus() {
     $(".crafting .btn").each(function() {
-        var $button = $(this);
-        if (player.technologies.hasOwnProperty($button.attr('href'))) {
+        var $button = $(this),
+            hasCapability = haveCapabilities($button.data('enabled'));
+
+        if (hasCapability && player.technologies.hasOwnProperty($button.attr('href'))) {
             $button.attr('disabled', true).addClass('learned');
         } else {
             $button.attr('disabled', false);
         }
-        
     });
 }
 

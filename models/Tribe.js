@@ -152,11 +152,11 @@ var Tribe = function(name) {
         }
     };
 
-    this.submitCrafting = function(player, item) {
+    this.submitCreation = function(player, item, type) {
         var leaders = this.subchiefs.concat(this.chief);
 
         for (var i in leaders) {
-            leaders[i].socket.emit('validateCrafting', {playerName: player.name, itemName: item.name, itemLabel: item.label});
+            leaders[i].socket.emit('validateCrafting', {type: type, playerName: player.name, itemName: item.name, itemLabel: item.label});
         }
     };
 

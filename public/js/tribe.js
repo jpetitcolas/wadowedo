@@ -195,7 +195,7 @@ socket.on('updateTribe', function(tributeData) {
 
 socket.on('validateCrafting', function(craftData) {
     var message = '<p>Le joueur <strong>' + craftData.playerName + '</strong> souhaite construire l\'objet <strong>' + craftData.itemLabel + '</strong>';
-    message += '<br /> <span class="crafting"><a href="' + craftData.itemName + '">Valider</a></span></p>';
+    message += '<br /> Construire <span class="' + craftData.type + '"><a href="' + craftData.itemName + '">' + craftData.itemLabel + '</a></span></p>';
 
     addMessageToChat('validation', message, new Date());
 });
