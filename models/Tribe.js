@@ -21,6 +21,7 @@ var Tribe = function(name) {
     };
 
     this.addPlayer = function(currentPlayer) {
+        currentPlayer.tribeName = this.name;
         // Transfer all player resources to the Tribe
         for(var i in currentPlayer.resources) {
             if (this.resources.hasOwnProperty(i)) {
@@ -69,6 +70,7 @@ var Tribe = function(name) {
         // Player leaves, but other player are in the tribe: remove all resource for this player
         if (removed && !shouldDelete) {
             currentPlayer.clearResources();
+            currentPlayer.tribeName = null;
 
             currentPlayer.socket.emit('updateResources', currentPlayer.resources);
         }

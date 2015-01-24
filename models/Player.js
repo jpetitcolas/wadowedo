@@ -3,6 +3,8 @@ var Player = function(name, socket) {
     this.socket = socket;
 
     this.health = 50;
+
+    this.tribeName = null;
     this.isChief = false;
     this.isSubChief = false;
 
