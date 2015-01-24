@@ -1,15 +1,21 @@
 /**
  * enable/disable buttons with a data-skills & data-inventory
  */
+var disableButtons = function() {
+    $('.actions a').attr('disabled',true);
+};
 
+var enableButtons = function() {
+    $('.actions a').attr('disabled',false);
+};
 
 function updateButtonsStatus() {
-    
+
     enableButtons();
     if (typeof(inprogress) != 'undefined') {
-        inprogress.stop();    
+        inprogress.stop();
     }
-    
+
     function updateButtonStatus($button, type, data) {
         var requirements = data.split(','),
             requirementInfos,
