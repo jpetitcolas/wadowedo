@@ -57,3 +57,11 @@ body > .container-fluid {
     background-color: #199CDA;
     border-color: #199CDA;
 }
+
+.login {
+    font-size:2.5rem;
+    background:url(/img/sky-min.jpg) no-repeat 50% 50%; background-size:content;
+}
+.login #login {
+    font-size:3rem;
+}
