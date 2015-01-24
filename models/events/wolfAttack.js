@@ -19,13 +19,13 @@ module.exports = function() {
 
         attack: function(tribe) {
             if (Math.random() < 0.5) {
-                var hitPoints = Math.random() * 50 % 50;
+                var hitPoints = Math.round(Math.random() * 50 % 50);
                 tribe.health -= hitPoints;
                 return "<p>La bataille tourne en votre défaveur. Les pertes sont supérieures à vos victimes. Vous subissez " +
                     "<strong>" + hitPoints + " points de dégâts</strong>.";
             }
 
-            var earnedFood = Math.random() * 100 % 100;
+            var earnedFood = Math.round(Math.random() * 100 % 100);
             tribe.resources.food += earnedFood;
             return "Vos valeureux chasseurs ont triomphés de vos féroces adversaires. Vous récoltez <strong>" + earnedFood
                 + " unités de nourriture</strong>.";
