@@ -18,10 +18,11 @@ body > .container-fluid {
     height: 64px;
 }
 
-#chat {
+.chat-messages {
     overflow-y:auto;
     height:15rem;
 }
+
 .progress-bar-happiness {
     background:#31B19D;
 }

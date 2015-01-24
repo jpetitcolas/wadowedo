@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Chat</h3>
+    </div>
+
+    <ul class="nav nav-tabs" id="chat-tabs" role="tablist">
+        <li class="active"><a href="#chat-all" data-toggle="tab">Tous <span class="badge" id="count-all">0</span></a></li>
+        <li><a href="#chat-tribe" data-toggle="tab">Tribu <span class="badge" id="count-tribe">0</span></a></li>
+        <li><a href="#chat-validation" data-toggle="tab">Validations <span class="badge" id="count-validation">0</span></a></li>
+    </ul>
+
+    <div class="panel-body chat">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="chat-all">
+                <div class="chat-messages"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="chat-tribe">
+                <div class="chat-messages"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="chat-validation">
+                <div class="chat-messages"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-footer">
+        <p>Nouveau message:</p>
+        <form action="#" id="message-form">
+            <textarea class="form-control" name="message" id="message" cols="30" rows="2"></textarea>
+        </form>
+    </div>
+</div>

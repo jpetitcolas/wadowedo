@@ -47,3 +47,7 @@ displayFileIn('navigation.html', $('#navigation'), function() {
     handleTribeName();
     $('#player-name').html(player.name);
 });
+
+displayFileIn('chat.html', $('#chat-container'), function() {
+    initChat();
+});
