@@ -27,7 +27,7 @@ var server = require('http').createServer(app.callback());
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
-    var player = new Player(socket)
+    var player = new Player(socket);
     hub.register(player);
 
     socket.on('chat:message', function(message) {

@@ -1,5 +1,7 @@
 module.exports = {
     name: 'stone',
+    updateSkills: function(player) {
+    },
     getHarvestedValue: function(player) {
         return player.skills.picking * 5 + player.inventory.pickaxe * 15;
     },

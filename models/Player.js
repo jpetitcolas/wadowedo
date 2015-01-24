@@ -14,11 +14,17 @@ var Player = function(socket) {
 
     this.skills = {
         picking: 5,
-        craftmanship: 0
+        craftmanship: 0,
+        hunting: 0,
+        surviving: 0,
+        forging: 0,
+        lumberjacking: 0,
+        architecting: 0,
+        cooking: 0
     };
 
     this.inventory = {
-        axe: 0,
+        axe: 1,
         pickaxe: 0,
         bow: 0,
         knife:0
@@ -31,7 +37,6 @@ var Player = function(socket) {
     });
 
     socket.on('build', function(objectName) {
-        console.log(objectName);
         self.build(require('./items/' + objectName));
     })
 };
@@ -43,8 +48,12 @@ Player.prototype.gather = function(resource) {
     me.socket.emit('gatheringTime', time);
 
     setTimeout(function() {
+        resource.updateSkills(me);
+
         me.resources[resource.name] += resource.getHarvestedValue(me);
-        me.socket.emit('gathering', { name: resource.name, value: me.resources[resource.name] });
+
+        me.socket.emit('gathering', {name: resource.name, value: me.resources[resource.name]});
+        me.socket.emit('skills', me.skills);
     }, time);
 };
 
@@ -58,7 +67,6 @@ Player.prototype.build = function(item) {
         }
 
         me.resources[type] -= requiredResources[type];
-        console.log({ name: type, value: me.resources[requiredResources[type]] });
         me.socket.emit('building:resources', { name: type, value: me.resources[type] });
     }
 

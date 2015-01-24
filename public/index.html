@@ -19,12 +19,13 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Compétences <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Chasse <span id="food">30</span></a></li>
-                                <li><a href="#">Survie <span id="food">30</span></a></li>
-                                <li><a href="#">Cueillette <span id="food">30</span></a></li>
-                                <li><a href="#">Forge <span id="food">30</span></a></li>
-                                <li><a href="#">Architecture <span id="food">30</span></a></li>
-                                <li><a href="#">Cuisine <span id="food">30</span></a></li>
+                                <li><a href="#">Chasse <span id="skill-hunting">0</span></a></li>
+                                <li><a href="#">Survie <span id="skill-surviving">0</span></a></li>
+                                <li><a href="#">Cueillette <span id="skill-picking">0</span></a></li>
+                                <li><a href="#">Forge <span id="skill-forging">0</span></a></li>
+                                <li><a href="#">Architecture <span id="skill-architecting">0</span></a></li>
+                                <li><a href="#">Cuisine <span id="skill-cooking">0</span></a></li>
+                                <li><a href="#">Bûcheronnage <span id="skill-lumberjacking">0</span></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -47,6 +48,11 @@
                     <a class="btn btn-default" href="harvest-wood" role="button" id="harvest-wood">Récolter du bois</a>
                     <a class="btn btn-default" href="harvest-stone"  id="harvest-stone" role="button">Récolter de la pierre</a>
                     <a class="btn btn-default" href="hunt" data-skills="longbow,knife"  id="harvest-wood"role="button">Chasser</a>
+                </div>
+
+                <div class="container-fluid crafting">
+                    <h3>Construction</h3>
+                    <a class="btn btn-default" href="axe" data-inventory="wood:300,stone:50" role="button">Chasser</a>
                 </div>
                 <div class="container-fluid actions">
                     <h3>Outils de base</h3>

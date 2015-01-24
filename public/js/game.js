@@ -1,4 +1,8 @@
-var socket = io();
+var socket = io(),
+    player = {
+        skills: {},
+        inventory: {}
+    };
 
 $("#message").keydown(function() {
     if (event.keyCode == 13) {
@@ -24,25 +28,15 @@ socket.on('chat:message', function(messages) {
 
 $('.actions a').click(function(e) {
     e.preventDefault();
-    switch(this.id) {
-    	case 'harvest-wood':
-			socket.emit('harvest', 'wood');
-    	    break;
 
-    	case 'harvest-stone':
-			socket.emit('harvest', 'stone');
-    	    break;
+    socket.emit('harvest', $(this).attr('href'));
+});
 
-    	case 'hunt':
-			socket.emit('hunt', 'biche');
-    	    break;
 
-        case 'build-bow':
-            socket.emit('build', 'bow');
-            break;
-    }
+$('.crafting a').click(function(e) {
+    e.preventDefault();
 
-    socket.emit('harvest', 'wood');
+    socket.emit('crafting', $(this).attr('href'));
 });
 
 ['gathering', 'building:resources'].forEach(function(event) {
@@ -56,3 +50,40 @@ $('.actions a').click(function(e) {
         od.update(data.value);
     });
 });
+
+socket.on('skills', function(skills){
+    var skillName,
+        skillCounter;
+
+    player.skills = skills;
+
+    for(skillName in skills) {
+        skillCounter = $('#skill-' + skillName)[0];
+
+        od = new Odometer({
+            el: skillCounter,
+            value: +skillCounter.innerHTML
+        });
+
+        od.update(skills[skillName]);
+    }
+});
+
+function updateButtonsStatus() {
+    function updateButtonStatus($button, type, data) {
+        var requirements = data.split(','),;
+
+        for(var i in requirements) {
+
+        }
+    };
+
+    $('*[data-inventory]').each(function(button) {
+        updateButtonStatus($(button), 'inventory', $(button).attr('data-inventory'));
+    });
+
+    $('*[data-skills]').each(function(button) {
+        updateButtonStatus($(button), 'skills', $(button).attr('data-skills'));
+    });
+};
+
