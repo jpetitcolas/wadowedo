@@ -7,7 +7,8 @@ var Player = function(name, socket) {
     this.isSubChief = false;
 
     this.totalHarvestedResources = {
-        wood: 0
+        wood: 0,
+        stone: 0
     };
 
     this.resources = {
@@ -26,7 +27,8 @@ var Player = function(name, socket) {
         forging: 0,
         lumberjacking: 0,
         architecting: 0,
-        cooking: 0
+        cooking: 0,
+        stoneCutting: 0
     };
 
     this.inventory = {
