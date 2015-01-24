@@ -5,10 +5,16 @@
 	</div>
 	<div class="panel-body">
 		<div class="row">
-			<div class="col-md-3">
-				<p id="player-name"></p>
+			<div class="col-md-4">
+				<div class="jumbotron">
+					<a data-toggle="modal" data-target="#tributeModal">
+						<span class="edit glyphicon glyphicon-wrench"></span>
+					</a>
+					<p>Joueur: <span id="player-name"></span></p>
+					<p>Votre tribu: <span class="current-tribe-name"></span></p>
+				</div>
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-8">
 				<div class="progress">
 					<div id="energy" class="progress-bar progress-bar-energy" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
 						<span>Energie</span>
@@ -40,34 +46,6 @@
 					<li class="list-group-item">Artisanat <span class="badge" id="skill-craftmanship">0</span></li>
 				</ul>
 			</div>
-		</div>
-	</div>
-</div>
-
-<!-- TRIBU -->
-<div class="panel panel-default tribe">
-	<div class="panel-heading">
-		<h3 class="panel-title">Tribus</h3>
-	</div>
-	<div class="panel-body">
-		<div class="col-md-6">
-			<h5>Liste des tribus</h5>
-			<ul id="tribe-list"></ul>
-
-			<h5>Créer votre tribu</h5>
-			<form id="create-tribe">
-				<label for="tribe-name">Nom</label>
-				<input type="text" name="tribe-name" id="tribe-name"/>
-
-				<input class="btn" type="submit" value="Créer" />
-			</form>
-			<span id="tribe-creation-message"></span>
-		</div>
-
-		<div id="your-tribe" class="col-md-6">
-			<h3>Votre tribu : <span class="current-tribe-name"></span></h3>
-
-			<ul id="member-list"></ul>
 		</div>
 	</div>
 </div>
@@ -122,3 +100,37 @@
 	</div>
 </div>
 
+
+<!-- TRIBU POPIN -->
+<div class="modal fade" id="tributeModal" tabindex="-1" role="dialog" aria-labelledby="tributeModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="tributeModalLabel">Tribu</h4>
+			</div>
+			<div class="modal-body">
+				<div class="panel">
+					<h4>Membres de votre tribu</h4>
+					<div id="your-tribe">
+						<ul id="member-list"></ul>
+					</div>
+				</div>
+				<div class="panel">
+					<h4>Liste des tribus</h4>
+					<ul id="tribe-list"></ul>
+				</div>
+				<div class="panel">
+					<h4>Créer votre tribu</h4>
+					<form id="create-tribe" class="form-inline">
+						<div class="form-group">
+							<input type="text" class="form-control" name="tribe-name" id="tribe-name" placeholder="Nom de votre tribu"/>
+							<input class="btn btn-default" type="submit" value="Créer" />
+						</div>
+					</form>
+					<span id="tribe-creation-message"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

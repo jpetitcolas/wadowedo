@@ -38,6 +38,16 @@ body > .container-fluid {
     min-width: 35px;
     background-color: #1FC772;
 }
+.health .jumbotron {
+    padding: 15px;
+}
+.health .edit {
+    float: right;
+}
+
+.join-tribe {
+    margin-left: 20px;
+}
 
 .crafting .btn-primary {
     background-color: #DA561B;

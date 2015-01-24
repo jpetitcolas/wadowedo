@@ -59,9 +59,9 @@ Player.prototype.craft = function(item) {
             continue;
         }
 
-        me.resources[type] -= requiredResources[type];
+        me.tribe.resources[type] -= requiredResources[type];
 
-        me.tribe.emitToAll('building:resources', { name: type, value: me.resources[type] });
+        me.tribe.emitToAll('building:resources', { name: type, value: me.tribe.resources[type] });
         me.tribe.emitToAll('updateNewItem', item.name);
     }
 
