@@ -62,13 +62,6 @@ Player.prototype.craft = function(item) {
         me.tribe.emitToAll('building:resources', { name: type, value: me.tribe.resources[type] });
         me.tribe.emitToAll('updateNewItem', item.name);
     }
-
-    if (typeof(me.inventory[item.name]) != 'undefined') {
-        setTimeout(function() {
-            me.inventory[item.name]++;
-        }, item.getBuildingTime(me));        
-    }
-
 };
 
 Player.prototype.sendNotification = function(message) {
