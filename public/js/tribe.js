@@ -1,6 +1,6 @@
 var tribesWithPlayers = {};
 
-$document.on('click', '#choose-tribe', function() {
+$document.on('click', '.tribe-status', function() {
     socket.emit('retrieveTribes');
 
     displayFileIn('screens/tribe.html', $('#main-screen'), function() {
@@ -126,7 +126,7 @@ function updateTribeList() {
     });
 
     if (!tribeNames.length) {
-        list.append('<li>Aucune tribue disponible</li>');
+        list.append('<li>Aucune tribu disponible</li>');
     }
 
     for (var i in tribeNames) {
