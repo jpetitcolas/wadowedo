@@ -2,8 +2,8 @@ var player = {
     skills: {},
     inventory: {},
     tribeName: null,
-    tribeParticipation: {
-    }
+    isChief: false,
+    isSubChief: false
 };
 
 ['gathering', 'building:resources'].forEach(function(event) {
@@ -23,7 +23,7 @@ var player = {
 });
 
 
-socket.on('skills', function(skills){
+socket.on('updateSkills', function(skills){
     var skillName,
         skillCounter;
 
@@ -35,7 +35,8 @@ socket.on('skills', function(skills){
 
         od = new Odometer({
             el: skillCounter,
-            value: +skillCounter.innerHTML
+            value: +skillCounter.innerHTML,
+            format: '(,ddd)'
         });
 
         od.update(skills[skillName]);
@@ -44,12 +45,13 @@ socket.on('skills', function(skills){
 });
 
 
-socket.on('newItem', function(newItem){
+
+socket.on('updateNewItem', function(newItem){
     updateButtonsStatus();
 
     player.inventory[newItem] = (typeof(player.inventory[newItem]) != 'undefined') 
-                                    ? player.inventory[newItem]++ 
-                                    : 1 ;
+                                ? player.inventory[newItem]++ 
+                                : 1 ;
     
     var counter = $("#"+newItem)[0];
     
@@ -58,4 +60,23 @@ socket.on('newItem', function(newItem){
         value: +counter.innerHTML
     });
     od.update(player.inventory[newItem]);
+});
+
+socket.on('updateResources', function(resources) {
+    var resourceCounter;
+
+    player.resources = resources;
+    updateButtonsStatus();
+
+    for(resourceName in resources) {
+        resourceCounter = $('#resource-' + resourceName)[0];
+
+        od = new Odometer({
+            el: resourceCounter,
+            value: +resourceCounter.innerHTML
+        });
+
+        od.update(resources[resourceName]);
+    }
+
 });

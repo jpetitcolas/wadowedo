@@ -27,6 +27,7 @@ body > .container-fluid {
     line-height: 32px;
     height: 64px;
 }
+
 #chat {
     overflow-y:auto;
     height:15rem;
@@ -36,4 +37,8 @@ body > .container-fluid {
 }
 .progress-bar-energy {
     background:maroon;
+}
+
+#player-name {
+    cursor: pointer;
 }

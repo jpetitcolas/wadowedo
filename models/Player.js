@@ -3,6 +3,12 @@ var Player = function(name, socket) {
     this.socket = socket;
 
     this.health = 50;
+    this.isChief = false;
+    this.isSubChief = false;
+
+    this.totalHarvestedResources = {
+        wood: 0
+    };
 
     this.resources = {
         food: 50,
@@ -41,6 +47,12 @@ var Player = function(name, socket) {
     });
 };
 
+Player.prototype.clearResources = function() {
+    for(var i in this.resources) {
+        this.resources[i] = 0;
+    }
+};
+
 Player.prototype.gather = function(resource) {
     var me = this,
         time = resource.getHarvestingTime(me);
@@ -50,10 +62,14 @@ Player.prototype.gather = function(resource) {
     setTimeout(function() {
         resource.updateSkills(me);
 
-        me.resources[resource.name] += resource.getHarvestedValue(me);
+        var harvestedValue = Math.round(resource.getHarvestedValue(me));
+        me.resources[resource.name] += harvestedValue;
+        if (me.totalHarvestedResources.hasOwnProperty(resource.name)) {
+            me.totalHarvestedResources[resource.name] += harvestedValue;
+        }
 
         me.socket.emit('gathering', {name: resource.name, value: me.resources[resource.name]});
-        me.socket.emit('skills', me.skills);
+        me.socket.emit('updateSkills', me.skills);
     }, time);
 };
 
@@ -68,7 +84,7 @@ Player.prototype.craft = function(item) {
 
         me.resources[type] -= requiredResources[type];
         me.socket.emit('building:resources', { name: type, value: me.resources[type] });
-        me.socket.emit('newItem', item.name);
+        me.socket.emit('updateNewItem', item.name);
     }
 
     setTimeout(function() {

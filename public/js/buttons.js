@@ -28,12 +28,10 @@ function updateButtonsStatus() {
         $button.attr('disabled', enabled ? null: 'disabled');
     }
 
-    $('*[data-inventory]').each(function(index, button) {
-        updateButtonStatus($(button), 'inventory', $(button).data('inventory'));
-    });
-
-    $('*[data-skills]').each(function(index, button) {
-        updateButtonStatus($(button), 'skills', $(button).data('skills'));
+    ['skills', 'inventory'].forEach(function(type) {
+        $('*[data-' + type + ']').each(function(index, button) {
+            updateButtonStatus($(button), type, $(button).data(type));
+        });
     });
 }
 
