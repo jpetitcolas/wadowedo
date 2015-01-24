@@ -14,6 +14,10 @@ module.exports = {
 
     getHarvestedValue: function(player) {
         var harvestedPerSecond = 1 + player.skills.lumberjacking * config.skill.harvest_influence;
+        if (player.inventory.axe > 0) {
+            harvestedPerSecond *= 1.5;
+        }
+
         return harvestedPerSecond * this.getHarvestingTime(player) / 1000;
     },
 

@@ -6,32 +6,41 @@
     <link href="/bower_components/odometer/themes/odometer-theme-minimal.css" rel="stylesheet">
     <link href="/css/ladda-themeless.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/tribe.css" rel="stylesheet">
 </head>
 <body>
     <div class="container-fluid">
         <nav class="navbar navbar-default">
-            <div class="container-fluid" id="navigation"></div>
+            <div class="navbar-header">
+                <span class="navbar-brand">What Do We Do ?</span>
+            </div>
         </nav>
 
-        <div class="row">
-            <div class="col-md-9" id="main-screen"></div>
-            <div class="col-md-2 chat" id="chat"></div>
+        <div class="container-fluid row">
+            <div class="col-md-7" id="main-screen"></div>
+            <div class="col-md-5">
+                <div class="panel panel-default actions">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Chat</h3>
+                    </div>
+                    <div class="panel-body chat">
+                        <div id="chat"></div>
+                    </div>
+                    <div class="panel-footer">
+                        <p>Nouveau message:</p>
+                        <form action="#" id="message-form">
+                            <textarea class="form-control" name="message" id="message" cols="30" rows="5"></textarea>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <form action="#" id="message-form">
-            <textarea class="form-control" name="message" id="message" cols="30" rows="5"></textarea>
-        </form>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/bower_components/odometer/odometer.min.js"></script>
-    <script src="/js/spin.min.js"></script>
-    <script src="/js/ladda.min.js"></script>
-    <script src="/js/routing.js"></script>
-    <script src="/js/game.js"></script>
-    <script src="/js/player.js"></script>
-    <script src="/js/chat.js"></script>
-    <script src="/js/buttons.js"></script>
-    <script src="/js/tribe.js"></script>
+    <script src="/dist/js/main.js"></script>
 </body>
 </html>

@@ -21,6 +21,7 @@ var Tribe = function(name) {
     };
 
     this.addPlayer = function(currentPlayer) {
+        currentPlayer.tribe = this;
         // Transfer all player resources to the Tribe
         for(var i in currentPlayer.resources) {
             if (this.resources.hasOwnProperty(i)) {
@@ -48,13 +49,7 @@ var Tribe = function(name) {
             shouldDelete;
 
         // Remove from subchiefs
-        for (var i in this.subchiefs) {
-            player = this.subchiefs[i];
-
-            if (player.name === currentPlayer.name) {
-                this.subchiefs.splice(i, 1);
-            }
-        }
+        this.removeFromSubChiefs(currentPlayer);
 
         // Remove from player
         for (var i in this.players) {
@@ -75,11 +70,38 @@ var Tribe = function(name) {
         // Player leaves, but other player are in the tribe: remove all resource for this player
         if (removed && !shouldDelete) {
             currentPlayer.clearResources();
+            currentPlayer.tribe = null;
 
             currentPlayer.socket.emit('updateResources', currentPlayer.resources);
         }
 
         return shouldDelete;
+    };
+
+    this.promote = function(player) {
+        player.isSubChief = true;
+        this.subchiefs.push(player);
+
+        this.chief.socket.emit('becomeSubChief');
+    };
+
+    this.deprive = function(player) {
+        player.isSubChief = false;
+        this.removeFromSubChiefs(player);
+
+        this.chief.socket.emit('leaveSubChiefPosition');
+    };
+
+    this.removeFromSubChiefs = function(currentPlayer) {
+        var player;
+
+        for (var i in this.subchiefs) {
+            player = this.subchiefs[i];
+
+            if (player.name === currentPlayer.name) {
+                this.subchiefs.splice(i, 1);
+            }
+        }
     };
 
     this.nominateNextChef = function() {
@@ -109,6 +131,14 @@ var Tribe = function(name) {
             if (currentPlayer.resources.hasOwnProperty(i)) {
                 currentPlayer.resources[i] = this.resources[i];
             }
+        }
+    };
+
+    this.submitCrafting = function(player, item) {
+        var leaders = this.subchiefs.concat(this.chief);
+
+        for (var i in leaders) {
+            leaders[i].socket.emit('validateCrafting', {playerName: player.name, itemName: item.name});
         }
     }
 };

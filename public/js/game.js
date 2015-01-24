@@ -2,14 +2,6 @@ var socket = io('', { query: window.location.search.substring(1) }),
     $document = $(document),
     inprogress;
 
-var disableButtons = function() {
-    $('.actions a').attr('disabled',true);
-};
-
-var enableButtons = function() {
-    $('.actions a').attr('disabled',false);
-};
-
 $(window).on('load', function() {
     player.name = window.location.search.substring(1).split('=')[1];
 });
@@ -52,6 +44,6 @@ displayFileIn('screens/main.html', $('#main-screen'), function() {
     updateButtonsStatus();
 });
 displayFileIn('navigation.html', $('#navigation'), function() {
-    $('#player-name').html(player.name);
     handleTribeName();
+    $('#player-name').html(player.name);
 });

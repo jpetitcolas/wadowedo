@@ -1,15 +1,5 @@
-body {
-    overflow: hidden;
-}
-
 body > .container-fluid {
     padding: 0;
-}
-
-#message-form {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
 }
 
 .login form {
@@ -33,12 +23,26 @@ body > .container-fluid {
     height:15rem;
 }
 .progress-bar-happiness {
-    background:#FD63C4;
+    background:#31B19D;
 }
 .progress-bar-energy {
-    background:maroon;
+    background:#469DC7;
 }
 
 #player-name {
     cursor: pointer;
+}
+
+.health .badge {
+    min-width: 35px;
+    background-color: #1FC772;
+}
+
+.crafting .btn-primary {
+    background-color: #DA561B;
+    border-color: #DA561B;
+}
+.actions .btn-primary {
+    background-color: #199CDA;
+    border-color: #199CDA;
 }

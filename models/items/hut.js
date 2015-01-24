@@ -1,13 +1,13 @@
 module.exports = {
-    name: 'bow',
-    label: 'Arc',
+    name: 'hut',
+    label: 'Hutte',
     requiresValidation: true,
     getRequiredResources: function() {
         return {
-            'wood': 20
+            'wood': 100
         };
     },
     getBuildingTime: function(player) {
-        return 600 - 5 * player.skills.craftmanship;
+        return 1500 - 5 * player.skills.craftmanship;
     }
 };

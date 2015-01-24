@@ -2,26 +2,32 @@ var player = {
     health:{},
     skills: {},
     inventory: {},
+    resources: {},
     tribeName: null,
     isChief: false,
     isSubChief: false
 };
 
-['gathering', 'building:resources'].forEach(function(event) {
-    socket.on(event, function(data) {
-        var counter = $('#resource-' + data.name)[0];
-        player.inventory[data.name] = +data.value;
-
-        od = new Odometer({
-            el: counter,
-            value: +counter.innerHTML
-        });
-
-        od.update(data.value);
-        updateButtonsStatus();
+function updateCounter(counter, value) {
+    od = new Odometer({
+        el: counter[0],
+        value: +counter[0].innerHTML
     });
+    od.update(value);
+    updateButtonsStatus();
+}
+
+socket.on('building:resources', function(data) {
+    player.inventory[data.name] = +data.value;
+
+    updateCounter($('#resource-' + data.name), +data.value)
 });
 
+socket.on('gathering', function(data) {
+    player.resources[data.name] = +data.value;
+
+    updateCounter($('#resource-' + data.name), +data.value)
+});
 
 socket.on('updateSkills', function(skills){
     var skillName,
@@ -40,7 +46,6 @@ socket.on('updateSkills', function(skills){
         });
 
         od.update(skills[skillName]);
-
     }
 });
 
@@ -53,13 +58,11 @@ socket.on('updateEnergy', function(energy){
 
 socket.on('updateNewItem', function(newItem){
     updateButtonsStatus();
-
-    player.inventory[newItem] = (typeof(player.inventory[newItem]) != 'undefined') 
-                                ? player.inventory[newItem]++ 
+    player.inventory[newItem] = (typeof(player.inventory[newItem]) != 'undefined')
+                                ? player.inventory[newItem]++
                                 : 1 ;
-    
+
     var counter = $("#"+newItem)[0];
-    
     od = new Odometer({
         el: counter,
         value: +counter.innerHTML
@@ -75,7 +78,6 @@ socket.on('updateResources', function(resources) {
 
     for(resourceName in resources) {
         resourceCounter = $('#resource-' + resourceName)[0];
-
         od = new Odometer({
             el: resourceCounter,
             value: +resourceCounter.innerHTML
@@ -83,5 +85,14 @@ socket.on('updateResources', function(resources) {
 
         od.update(resources[resourceName]);
     }
+});
 
+socket.on('updateInventory', function(inventory) {
+    $("#tools span").each(function(index, itemCount) {
+        if (!inventory.hasOwnProperty(itemCount.id)) {
+            return;
+        }
+
+        $(this).text(inventory[itemCount.id]);
+    });
 });

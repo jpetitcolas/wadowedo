@@ -45,6 +45,8 @@ io.on('connection', function(socket) {
     });
 });
 
+(require('./lib/EventEngine')()).start(hub);
+
 server.listen(port);
 
 console.info('server listening on port ' + port);

@@ -1,25 +1,113 @@
-<div class="container-fluid health">
-    <h3>Santé</h3>
-	<div class="progress">
-	  <div id="energy" class="progress-bar progress-bar-energy" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-	    <span>Energie</span>
-	  </div>
+<!-- COMPETENCES -->
+<div class="panel panel-default health">
+	<div class="panel-heading">
+		<h3 class="panel-title">Compétences</h3>
 	</div>
-	<div class="progress">
-	  <div id="happiness" class="progress-bar progress-bar-happiness" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
-	    <span>Joie</span>
-	  </div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-3">
+				<p id="player-name"></p>
+			</div>
+			<div class="col-md-9">
+				<div class="progress">
+					<div id="energy" class="progress-bar progress-bar-energy" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+						<span>Energie</span>
+					</div>
+				</div>
+				<div class="progress">
+					<div id="happiness" class="progress-bar progress-bar-happiness" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
+						<span>Joie</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<ul class="list-group">
+					<li class="list-group-item">Chasse <span class="badge" id="skill-hunting">0</span></li>
+					<li class="list-group-item">Survie <span class="badge" id="skill-surviving">0</span></li>
+					<li class="list-group-item">Cueillette <span class="badge" id="skill-picking">0</span></li>
+					<li class="list-group-item">Forge <span class="badge" id="skill-forging">0</span></li>
+					<li class="list-group-item">Taillage de pierre <span class="badge" id="skill-stoneCutting">0</span></li>
+				</ul>
+			</div>
+			<div class="col-md-6">
+				<ul class="list-group">
+					<li class="list-group-item">Architecture <span class="badge" id="skill-architecting">0</span></li>
+					<li class="list-group-item">Cuisine <span class="badge" id="skill-cooking">0</span></li>
+					<li class="list-group-item">Bûcheronnage <span class="badge" id="skill-lumberjacking">0</span></li>
+					<li class="list-group-item">Artisanat <span class="badge" id="skill-craftmanship">0</span></li>
+				</ul>
+			</div>
+		</div>
 	</div>
 </div>
-<div class="container-fluid actions">
-    <h3>Actions élémentaires</h3>
-    <a class="btn btn-primary ladda-button" href="wood" role="button" data-style="expand-left"><span class="ladda-label">Récolter du bois</span></a>
-    <a class="btn btn-primary ladda-button" href="stone" id="harvest-stone" role="button" data-style="expand-left"><span class="ladda-label">Récolter de la pierre</span></a>
-    <a class="btn btn-primary ladda-button" href="hunt" data-skills="longbow,knife" role="button" data-style="expand-left"><span class="ladda-label">Chasser</span></a>
+
+<!-- TRIBU -->
+<div class="panel panel-default tribe">
+	<div class="panel-heading">
+		<h3 class="panel-title">Tribus</h3>
+	</div>
+	<div class="panel-body">
+		<div class="col-md-6">
+			<h5>Liste des tribus</h5>
+			<ul id="tribe-list"></ul>
+
+			<h5>Créer votre tribu</h5>
+			<form id="create-tribe">
+				<label for="tribe-name">Nom</label>
+				<input type="text" name="tribe-name" id="tribe-name"/>
+
+				<input class="btn" type="submit" value="Créer" />
+			</form>
+			<span id="tribe-creation-message"></span>
+		</div>
+
+		<div id="your-tribe" class="col-md-6">
+			<h3>Votre tribu : <span class="current-tribe-name"></span></h3>
+
+			<ul id="member-list"></ul>
+
+			<a id="leave-tribe" class="btn btn-default">Quitter la tribu</a>
+		</div>
+	</div>
+</div>
+
+<!-- INVENTAIRE -->
+<div class="panel panel-default crafting">
+	<div class="panel-heading">
+		<h3 class="panel-title">Inventaire</h3>
+	</div>
+	<div class="panel-body">
+		<a class="btn btn-primary ladda-button" href="axe" data-enabled="resources.wood>=25 && resources.stone>=5" role="button" data-style="expand-left"><span class="ladda-label">Hache</span></a>
+		<a class="btn btn-primary ladda-button" href="pickaxe" data-enabled="resources.wood>=25 && resources.stone >= 125" role="button" data-style="expand-left"><span class="ladda-label">Pioche</span></a>
+		<a class="btn btn-primary ladda-button" href="bow" data-enabled="resources.wood>=20" role="button" data-style="expand-left"><span class="ladda-label">Arc</span></a>
+		
+		<ul class="nav navbar-nav navbar-right">
+			<li><a>Nourriture: <span id="resource-food">0</span></a></li>
+			<li><a>Terre: <span id="resource-soil">0</span></a></li>
+			<li><a>Bois: <span id="resource-wood">0</span></a></li>
+			<li><a>Pierre: <span id="resource-stone">0</span></a></li>
+			<li><a>Or: <span id="resource-gold">0</span></a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- ACTIONS -->
+<div class="panel panel-default actions">
+	<div class="panel-heading">
+		<h3 class="panel-title">Actions</h3>
+	</div>
+	<div class="panel-body">
+		<a class="btn btn-primary ladda-button" href="wood" role="button" data-style="expand-left"><span class="ladda-label">Récolter du bois</span></a>
+		<a class="btn btn-primary ladda-button" href="stone" id="harvest-stone" role="button" data-style="expand-left"><span class="ladda-label">Récolter de la pierre</span></a>
+		<a class="btn btn-primary ladda-button" href="hunt" data-enabled="inventory.longbow>=1||inventory.knife>=1" role="button" data-style="expand-left"><span class="ladda-label">Chasser</span></a>
+	</div>
 </div>
 
 <div class="container-fluid crafting">
-    <h3>Construire un outil</h3>
-    <a class="btn btn-primary ladda-button" href="axe" data-inventory="wood:50,stone:20" role="button" data-style="expand-left"><span class="ladda-label">Hache</span></a>
-    <a class="btn btn-primary ladda-button" href="bow" data-inventory="wood:50" role="button" data-style="expand-left"><span class="ladda-label">Arc</span></a>
+	<h3>Construire un bâtiment</h3>
+
+	<a class="btn btn-primary ladda-button" href="hut" data-enabled="resources.wood>=100"><span class="ladda-label">Hutte</span></a>
 </div>
