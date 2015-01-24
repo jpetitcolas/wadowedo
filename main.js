@@ -1,6 +1,6 @@
 var koa = require('koa');
 var koaStatic = require('koa-static'),
-    port = 3000;
+    port = process.env.NODE_PORT || 3000;
 
 var app = module.exports = koa(),
     Player = require('./models/Player.js');
@@ -35,7 +35,7 @@ io.on('connection', function(socket) {
     });
 });
 
-server.listen(3000);
+server.listen(port);
 
 console.info('server listening on port ' + port);
 console.info('Press CTRL+C to stop server');
