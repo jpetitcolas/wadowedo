@@ -34,7 +34,7 @@ body > .container-fluid {
     cursor: pointer;
 }
 
-.health .badge {
+.badge {
     min-width: 35px;
     background-color: #1FC772;
 }
