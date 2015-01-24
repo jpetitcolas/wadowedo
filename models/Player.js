@@ -34,6 +34,14 @@ var Player = function(name, socket) {
         knife:0
     };
 
+    this.tribeParticipation = {
+        food: 0,
+        wood: 0,
+        stone: 0,
+        gold: 0,
+        soil: 0
+    };
+
     var self = this;
 
     socket.on('harvest', function(resourceName){
