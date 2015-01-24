@@ -13,7 +13,6 @@ var inprogress;
 function addButtonEvents () {
     $('.actions a').click(function(e) {
         e.preventDefault();
-        disableButtons();
         inprogress = Ladda.create(this);
         inprogress.start();
         disableButtons();
@@ -23,6 +22,9 @@ function addButtonEvents () {
 
     $('.crafting a').click(function(e) {
         e.preventDefault();
+        inprogress = Ladda.create(this);
+        inprogress.start();
+        disableButtons();
         socket.emit('crafting', $(this).attr('href'));
     });
 }

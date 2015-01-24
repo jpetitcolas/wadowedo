@@ -2,10 +2,14 @@
  * enable/disable buttons with a data-skills & data-inventory
  */
 
- 
+
 function updateButtonsStatus() {
-    inprogress.stop();
+    
     enableButtons();
+    if (typeof(inprogress) != 'undefined') {
+        inprogress.stop();    
+    }
+    
     function updateButtonStatus($button, type, data) {
         var requirements = data.split(','),
             requirementInfos,
