@@ -68,7 +68,9 @@ Player.prototype.gather = function(resource) {
 };
 
 Player.prototype.craft = function(item) {
-    if (this.tribe && item.requiresValidation) {
+    // Ask for a leader if the item requires a validation
+    if (this.tribe && item.requiresValidation && (!this.isChief || !this.isSubChief)) {
+        this.tribe.submitCrafting(player, item);
         return this.sendNotification('La construction de cet object requiert la valition des chefs de la tribu, la demande est partie.');
     }
 

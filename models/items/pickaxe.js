@@ -1,5 +1,6 @@
 module.exports = {
     name: 'pickaxe',
+    label: 'Pioche',
     requiresValidation: true,
     getRequiredResources: function() {
         return {

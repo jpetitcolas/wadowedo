@@ -200,3 +200,7 @@ socket.on('updateTribe', function(tributeData) {
 
     handleTribeName();
 });
+
+socket.on('validateCrafting', function(craftData) {
+    
+});

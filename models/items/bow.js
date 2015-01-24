@@ -1,5 +1,6 @@
 module.exports = {
     name: 'bow',
+    label: 'Arc',
     requiresValidation: true,
     getRequiredResources: function() {
         return {

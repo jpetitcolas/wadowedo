@@ -1,5 +1,6 @@
 module.exports = {
     name: 'axe',
+    label: 'Hache',
     requiresValidation: false,
     getRequiredResources: function() {
         return {

@@ -132,6 +132,14 @@ var Tribe = function(name) {
                 currentPlayer.resources[i] = this.resources[i];
             }
         }
+    };
+
+    this.submitCrafting = function(player, item) {
+        var leaders = this.subchiefs.concat(this.chief);
+
+        for (var i in leaders) {
+            leaders[i].socket.emit('validateCrafting', {playerName: player.name, itemName: item.name});
+        }
     }
 };
 
