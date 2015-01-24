@@ -13,13 +13,14 @@ var Player = function(socket) {
     };
 
     this.skills = {
-        picking: 5
+        picking: 5,
+        craftmanship: 0
     };
 
     this.inventory = {
         axe: 0,
         pickaxe: 0,
-        longbow: 0,
+        bow: 0,
         knife:0
     };
 
@@ -28,6 +29,11 @@ var Player = function(socket) {
     socket.on('harvest', function(resourceName){
         self.gather(require('./resources/' + resourceName));
     });
+
+    socket.on('build', function(objectName) {
+        console.log(objectName);
+        self.build(require('./items/' + objectName));
+    })
 };
 
 Player.prototype.gather = function(resource) {
@@ -38,9 +44,27 @@ Player.prototype.gather = function(resource) {
 
     setTimeout(function() {
         me.resources[resource.name] += resource.getHarvestedValue(me);
-
-        me.socket.emit('gathering', {name: resource.name, value: me.resources[resource.name]});
+        me.socket.emit('gathering', { name: resource.name, value: me.resources[resource.name] });
     }, time);
+};
+
+Player.prototype.build = function(item) {
+    var me = this;
+
+    var requiredResources = item.getRequiredResources();
+    for (var type in requiredResources) {
+        if (!requiredResources.hasOwnProperty(type)) {
+            continue;
+        }
+
+        me.resources[type] -= requiredResources[type];
+        console.log({ name: type, value: me.resources[requiredResources[type]] });
+        me.socket.emit('building:resources', { name: type, value: me.resources[type] });
+    }
+
+    setTimeout(function() {
+        me.inventory.bow++;
+    }, item.getBuildingTime(me));
 };
 
 module.exports = Player;

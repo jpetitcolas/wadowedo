@@ -27,25 +27,32 @@ $('.actions a').click(function(e) {
     switch(this.id) {
     	case 'harvest-wood':
 			socket.emit('harvest', 'wood');
-    	break;
+    	    break;
+
     	case 'harvest-stone':
 			socket.emit('harvest', 'stone');
-    	break;
+    	    break;
+
     	case 'hunt':
 			socket.emit('hunt', 'biche');
-    	break;
+    	    break;
+
+        case 'build-bow':
+            socket.emit('build', 'bow');
+            break;
     }
 
     socket.emit('harvest', 'wood');
 });
 
-socket.on('gathering', function(data){
-    var counter = $('#resource-' + data.name)[0];
+['gathering', 'building:resources'].forEach(function(event) {
+    socket.on(event, function(data) {
+        var counter = $('#resource-' + data.name)[0];
+        od = new Odometer({
+            el: counter,
+            value: +counter.innerHTML
+        });
 
-    od = new Odometer({
-        el: counter,
-        value: +counter.innerHTML
+        od.update(data.value);
     });
-
-    od.update(data.value);
 });
