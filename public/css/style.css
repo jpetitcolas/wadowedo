@@ -27,3 +27,7 @@ body > .container-fluid {
     line-height: 32px;
     height: 64px;
 }
+#chat {
+    overflow-y:auto;
+    height:15rem;
+}

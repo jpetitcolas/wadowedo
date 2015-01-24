@@ -10,12 +10,15 @@ $('#message-form').submit(function(e) {
 
     socket.emit('chat:message', $('#message').val());
     $(this).get(0).reset();
+
 });
 
 var chat = $('.chat');
 socket.on('chat:message', function(messages) {
+
     for (var i = 0, c = messages.length ; i < c ; i++) {
         var message = messages[i];
-        chat.append('<p class="message"><strong>' + message.name + '</strong>: ' + message.message);
+        console.log("zsz");
+        chat.prepend('<p class="message"><strong>' + message.name + '</strong>: ' + message.message);
     }
 });
