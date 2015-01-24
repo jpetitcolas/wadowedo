@@ -72,16 +72,12 @@
 	</div>
 </div>
 
-<!-- INVENTAIRE -->
+<!-- RESSOURCES -->
 <div class="panel panel-default crafting">
 	<div class="panel-heading">
-		<h3 class="panel-title">Inventaire</h3>
+		<h3 class="panel-title">Ressources</h3>
 	</div>
 	<div class="panel-body">
-		<a class="btn btn-primary ladda-button" href="axe" data-enabled="resources.wood>=25 && resources.stone>=5"><span class="ladda-label">Hache</span></a>
-		<a class="btn btn-primary ladda-button" href="pickaxe" data-enabled="resources.wood>=25 && resources.stone >= 125"><span class="ladda-label">Pioche</span></a>
-		<a class="btn btn-primary ladda-button" href="bow" data-enabled="resources.wood>=20"><span class="ladda-label">Arc</span></a>
-
 		<ul class="nav navbar-nav navbar-right">
 			<li><a>Nourriture: <span id="resource-food">0</span></a></li>
 			<li><a>Terre: <span id="resource-soil">0</span></a></li>
@@ -92,20 +88,37 @@
 	</div>
 </div>
 
+
 <!-- ACTIONS -->
 <div class="panel panel-default actions">
 	<div class="panel-heading">
 		<h3 class="panel-title">Actions</h3>
 	</div>
 	<div class="panel-body">
-		<a class="btn btn-primary ladda-button" href="wood"><span class="ladda-label">Récolter du bois</span></a>
-		<a class="btn btn-primary ladda-button" href="stone" id="harvest-stone"><span class="ladda-label">Récolter de la pierre</span></a>
-		<a class="btn btn-primary ladda-button" href="hunt" data-enabled="inventory.longbow>=1||inventory.knife>=1"><span class="ladda-label">Chasser</span></a>
+		<a class="btn btn-primary ladda-button" href="wood" data-style="expand-left"><span class="ladda-label">Récolter du bois</span></a>
+		<a class="btn btn-primary ladda-button" href="stone" id="harvest-stone" data-style="expand-left"><span class="ladda-label">Récolter de la pierre</span></a>
+		<a class="btn btn-primary ladda-button" href="hunt" data-enabled="inventory.bow>=1||inventory.knife>=1" data-style="expand-left"><span class="ladda-label">Chasser</span></a>
 	</div>
 </div>
 
-<div class="container-fluid crafting">
-	<h3>Construire un bâtiment</h3>
-
-	<a class="btn btn-primary ladda-button" href="hut" data-enabled="resources.wood>=100"><span class="ladda-label">Hutte</span></a>
+<div class="panel panel-default crafting">
+	<div class="panel-heading">
+		<h3 class="panel-title">Construire un bâtiment</h3>
+	</div>
+	<div class="panel-body">
+		<a class="btn btn-primary ladda-button" href="hut" data-enabled="resources.wood>=100"><span class="ladda-label">Hutte</span></a>
+	</div>
 </div>
+
+<!-- TECHNOS -->
+<div class="panel panel-default crafting">
+	<div class="panel-heading">
+		<h3 class="panel-title">Technologies</h3>
+	</div>
+	<div class="panel-body">
+		<a class="btn btn-primary ladda-button" href="axe" data-enabled="resources.wood>=25 && resources.stone>=5"><span class="ladda-label">Hache</span></a>
+		<a class="btn btn-primary ladda-button" href="pickaxe" data-enabled="resources.wood>=25 && resources.stone >= 125"><span class="ladda-label">Pioche</span></a>
+		<a class="btn btn-primary ladda-button" href="bow" data-enabled="resources.wood>=20"><span class="ladda-label">Arc</span></a>
+	</div>
+</div>
+
