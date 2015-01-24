@@ -15,10 +15,8 @@ $('#message-form').submit(function(e) {
 
 var chat = $('.chat');
 socket.on('chat:message', function(messages) {
-
     for (var i = 0, c = messages.length ; i < c ; i++) {
         var message = messages[i];
-        console.log("zsz");
         chat.prepend('<p class="message"><strong>' + message.name + '</strong>: ' + message.message);
     }
 });
