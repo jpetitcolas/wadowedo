@@ -1,4 +1,9 @@
 {
+  "events": {
+    "delay": 8000,
+    "probability": 0.9,
+    "voting_duration": 3000
+  },
   "skill": {
     "growth_factor": 10
   }

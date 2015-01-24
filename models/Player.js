@@ -22,9 +22,7 @@ var Player = function(name, socket) {
         stoneCutting: 0
     };
 
-    this.clicks = {
-
-    };
+    this.clicks = {};
 };
 
 Player.prototype.gather = function(resource) {

@@ -20,7 +20,7 @@ module.exports = function() {
         attack: function(tribe) {
             if (Math.random() < 0.5) {
                 var hitPoints = Math.round(Math.random() * 50 % 50);
-                tribe.health -= hitPoints;
+                tribe.setHealth(tribe.health - hitPoints);
                 return "<p>La bataille tourne en votre défaveur. Les pertes sont supérieures à vos victimes. Vous subissez " +
                     "<strong>" + hitPoints + " points de dégâts</strong>.";
             }

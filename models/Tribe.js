@@ -172,7 +172,12 @@ var Tribe = function(name) {
         }
 
         return result;
-    }
+    };
+
+    this.setHealth = function(health) {
+        this.health = health;
+        this.emitToAll('updateHealth', health);
+    };
 };
 
 module.exports = Tribe;

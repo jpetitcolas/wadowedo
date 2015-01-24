@@ -117,3 +117,7 @@ socket.on('updateInventory', function(inventory) {
         $(this).text(inventory[itemCount.id]);
     });
 });
+
+socket.on('updateHealth', function(health) {
+    $(".progress-bar-energy").css("width", health + "%");
+});
