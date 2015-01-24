@@ -27,8 +27,6 @@ Player.prototype.gather = function(resource) {
     var me = this,
         time = resource.getHarvestingTime(me);
 
-    me.socket.emit('gatheringTime', time);
-
     setTimeout(function() {
         resource.updateSkills(me);
 
@@ -66,7 +64,7 @@ Player.prototype.craft = function(item) {
     }
 
     setTimeout(function() {
-        me.inventory[item.name]++;
+        me.tribe.inventory[item.name]++;
     }, item.getBuildingTime(me));
 };
 

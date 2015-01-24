@@ -28,6 +28,7 @@ $document.on('click', '#eat', function(e) {
     inprogress = Ladda.create(this);
     inprogress.start();
     disableButtons();
+
     socket.emit('eat', $(this).attr('href'));
 });
 
