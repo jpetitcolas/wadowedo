@@ -71,12 +71,12 @@ socket.on('skills', function(skills){
 
 function updateButtonsStatus() {
     function updateButtonStatus($button, type, data) {
-        var requirements = data.split(','),;
+        var requirements = data.split(',');
 
         for(var i in requirements) {
 
         }
-    };
+    }
 
     $('*[data-inventory]').each(function(button) {
         updateButtonStatus($(button), 'inventory', $(button).attr('data-inventory'));
@@ -85,5 +85,5 @@ function updateButtonsStatus() {
     $('*[data-skills]').each(function(button) {
         updateButtonStatus($(button), 'skills', $(button).attr('data-skills'));
     });
-};
+}
 
