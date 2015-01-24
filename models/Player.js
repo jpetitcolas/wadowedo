@@ -1,5 +1,5 @@
-var Player = function(socket) {
-    this.name = "Anonymous";
+var Player = function(name, socket) {
+    this.name = name;
     this.socket = socket;
 
     this.health = 50;

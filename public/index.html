@@ -1,75 +1,19 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Wadowedo</title>
+    <meta charset="UTF-8">
+    <title>WadoWedo, an Open World Simulator</title>
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/bower_components/odometer/themes/odometer-theme-minimal.css" rel="stylesheet">
-    <link href="/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css"/>
 </head>
-<body>
-    <div class="container-fluid">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Brand</a>
-                </div>
-
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Compétences <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Chasse <span id="skill-hunting">0</span></a></li>
-                                <li><a href="#">Survie <span id="skill-surviving">0</span></a></li>
-                                <li><a href="#">Cueillette <span id="skill-picking">0</span></a></li>
-                                <li><a href="#">Forge <span id="skill-forging">0</span></a></li>
-                                <li><a href="#">Architecture <span id="skill-architecting">0</span></a></li>
-                                <li><a href="#">Cuisine <span id="skill-cooking">0</span></a></li>
-                                <li><a href="#">Bûcheronnage <span id="skill-lumberjacking">0</span></a></li>
-                                <li><a href="#">Artisanat <span id="skill-craftmanship">0</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a>Nourriture: <span id="resource-food">0</span></a></li>
-                        <li><a>Bois: <span id="resource-wood">0</span></a></li>
-                        <li><a>Terre: <span id="resource-soil">0</span></a></li>
-                        <li><a>Pierre: <span id="resource-stone">0</span></a></li>
-                        <li><a>Or: <span id="resource-gold">0</span></a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div class="row">
-            <div class="col-md-9">
-                <div class="container-fluid actions">
-                    <h3>Matières premières</h3>
-                    <a class="btn btn-default" href="wood" role="button">Récolter du bois</a>
-                    <a class="btn btn-default" href="stone" id="harvest-stone" role="button">Récolter de la pierre</a>
-                    <a class="btn btn-default" href="hunt" data-skills="longbow,knife" role="button">Chasser</a>
-                </div>
-
-                <div class="container-fluid crafting">
-                    <h3>Outils de base</h3>
-                    <a class="btn btn-default" href="axe" data-inventory="wood:50,stone:20" role="button">Construire hache</a>
-                    <a class="btn btn-default" href="bow" data-inventory="wood:50" role="button">Construire arc</a>
-                </div>
-            </div>
-            <div class="col-md-3 chat"></div>
-        </div>
-        <form action="#" id="message-form">
-            <textarea class="form-control" name="message" id="message" cols="30" rows="5"></textarea>
+<body class="login">
+    <div class="container">
+        <form action="/game.html" method="GET">
+            <p class="form-group">
+                <label for="login">What is your name, adventurer?</label>
+                <input type="text" id="login" name="login" class="form-control big-one" />
+            </p>
         </form>
     </div>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/bower_components/odometer/odometer.min.js"></script>
-    <script src="/js/game.js"></script>
-    <script src="/js/player.js"></script>
-    <script src="/js/chat.js"></script>
-    <script src="/js/buttons.js"></script>
 </body>
 </html>

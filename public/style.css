@@ -11,3 +11,19 @@ body > .container-fluid {
     bottom: 0;
     width: 100%;
 }
+
+.login form {
+    position: absolute;
+    top: 50%;
+    margin-top: -100px;
+    height: 100px;
+    width: 700px;
+    left: 50%;
+    margin-left: -350px;
+}
+
+.login form input {
+    font-size: 32px;
+    line-height: 32px;
+    height: 64px;
+}
