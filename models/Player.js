@@ -21,25 +21,42 @@ var Player = function(name, socket) {
         cooking: 0,
         stoneCutting: 0
     };
+
+    this.clicks = {
+
+    };
 };
 
 Player.prototype.gather = function(resource) {
-    var me = this,
-        time = resource.getHarvestingTime(me);
+    var me = this;
 
-    setTimeout(function() {
-        resource.updateSkills(me);
+    // Init currently crafting resource
+    if (!me.tribe.currentCraftingClicks.resources.hasOwnProperty(resource.name)) {
+        me.tribe.currentCraftingClicks.resources[resource.name] = 0;
+    }
 
-        var harvestedValue = Math.round(resource.getHarvestedValue(me, me.tribe));
-        me.tribe.resources[resource.name] += harvestedValue;
+    // Init click count
+    if (!me.clicks.hasOwnProperty(resource.name)) {
+        me.clicks[resource.name] = 0;
+    }
 
-        if (me.totalHarvestedResources.hasOwnProperty(resource.name)) {
-            me.totalHarvestedResources[resource.name] += harvestedValue;
-        }
+    me.clicks[resource.name]++;
+    me.tribe.currentCraftingClicks.resources[resource.name]++;
 
+    me.tribe.emitToAll('clickCount', {
+        resourceName: resource.name,
+        count: resource.clicks - me.tribe.currentCraftingClicks.resources[resource.name]
+    });
+
+    // Update all tribe player skills
+    if (me.tribe.currentCraftingClicks.resources[resource.name] === resource.clicks) {
+        me.tribe.resources[resource.name] += Math.round(resource.getHarvestedValue(me, me.tribe));
+
+        me.tribe.sendSkills(resource);
         me.tribe.emitToAll('gathering', {name: resource.name, value: me.tribe.resources[resource.name]});
-        me.socket.emit('updateSkills', me.skills);
-    }, time);
+
+        delete me.tribe.currentCraftingClicks.resources[resource.name];
+    }
 };
 
 Player.prototype.craft = function(item) {
@@ -50,17 +67,39 @@ Player.prototype.craft = function(item) {
     }
 
     var me = this,
+        requiredResources;
+
+    // Init currently crafting resource
+    if (!me.tribe.currentCraftingClicks.items.hasOwnProperty(item.name)) {
+        me.tribe.currentCraftingClicks.items[item.name] = 0;
+
+        // Decrement tribe resources for this item
         requiredResources = item.getRequiredResources();
 
-    for (var type in requiredResources) {
-        if (!requiredResources.hasOwnProperty(type)) {
-            continue;
+        for (var type in requiredResources) {
+            if (!requiredResources.hasOwnProperty(type)) {
+                continue;
+            }
+
+            me.tribe.resources[type] -= requiredResources[type];
+
+            me.tribe.emitToAll('building:resources', { name: type, value: me.tribe.resources[type] });
         }
+    }
 
-        me.tribe.resources[type] -= requiredResources[type];
+    // Init click count
+    if (!me.clicks.hasOwnProperty(item.name)) {
+        me.clicks[resource.name] = 0;
+    }
 
-        me.tribe.emitToAll('building:resources', { name: type, value: me.tribe.resources[type] });
+    me.clicks[item.name]++;
+    me.tribe.currentCrafting[item.name].clicks++;
+
+    if (me.tribe.currentCraftingClicks.items[resource.name] === resource.clicks) {
+        me.tribe.inventory[item.name]++;
         me.tribe.emitToAll('updateNewItem', item.name);
+
+        delete me.tribe.currentCraftingClicks.items[resource.name];
     }
 };
 

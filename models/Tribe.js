@@ -22,9 +22,39 @@ var Tribe = function(name) {
         knife:0
     };
 
+    this.currentCraftingClicks = {
+        resources: {},
+        items: {}
+    };
+
     this.emitToAll = function(eventName, object) {
         for (var i in this.players) {
             this.players[i].socket.emit(eventName, object);
+        }
+    };
+
+    this.sendSkills = function(resource) {
+        var player,
+            nbPlayerClicks,
+            nbTotalClicks,
+            harvestedValue;
+
+        for (var i in this.players) {
+            player = this.players[i];
+            if(!player.clicks.hasOwnProperty(resource.name)) {
+                continue;
+            }
+
+            nbPlayerClicks = player.clicks[resource.name];
+            nbTotalClicks = this.currentCraftingClicks[resource.name];
+            harvestedValue = Math.round(resource.getHarvestedValue(player, player.tribe));
+
+            resource.updateSkills(player, nbPlayerClicks);
+            if (player.totalHarvestedResources.hasOwnProperty(resource.name)) {
+                player.totalHarvestedResources[resource.name] += harvestedValue * nbPlayerClicks / nbTotalClicks;
+            }
+
+            player.socket.emit('updateSkills', player.skills);
         }
     };
 
@@ -68,6 +98,7 @@ var Tribe = function(name) {
 
         if (removed) {
             currentPlayer.tribe = null;
+            currentPlayer.clicks = {};
         }
 
         return shouldDelete;
@@ -127,6 +158,20 @@ var Tribe = function(name) {
         for (var i in leaders) {
             leaders[i].socket.emit('validateCrafting', {playerName: player.name, itemName: item.name, itemLabel: item.label});
         }
+    };
+
+    this.getAllCraftingClicks = function() {
+        var result = {};
+
+        for (var name in this.currentCraftingClicks.items) {
+            result[name] = require('./items/' + name).clicks - this.currentCraftingClicks.items[name];
+        }
+
+        for (var name in this.currentCraftingClicks.resources) {
+            result[name] = require('./resources/' + name).clicks - this.currentCraftingClicks.resources[name];
+        }
+
+        return result;
     }
 };
 

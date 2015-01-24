@@ -1,9 +1,10 @@
 module.exports = {
     name: 'meat',
-    getHarvestedValue: function(player, tribe) {
-        return player.skills.hunting * 5 + player.inventory.bow * 15;
+    updateSkills: function(player) {
+        // @TODO
     },
-    getHarvestingTime: function(player) {
-        return 1000 - (player.skills.hunting * 5 + player.inventory.bow * 15);
-    }
+    getHarvestedValue: function(player, tribe) {
+        return player.skills.hunting * 5 + tribe.inventory.bow * 15;
+    },
+    clicks: 50 + Math.round(50 * Math.random())
 };

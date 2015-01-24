@@ -18,16 +18,45 @@ function updateCounter(counter, value) {
     updateButtonsStatus();
 }
 
+function updateClickCount(name, value) {
+    if (!value) {
+        return;
+    }
+
+    var button = $('a[href="' + name + '"]');
+    if (!button.data('label')) {
+        button.data('label', button.html());
+    }
+
+    button.html( button.data('label') + ' (' + value + ')');
+}
+
 socket.on('building:resources', function(data) {
+    var button = $('a[href="' + data.name + '"]');
+    button.html(button.data('label'));
+
     player.inventory[data.name] = +data.value;
 
     updateCounter($('#resource-' + data.name), +data.value)
 });
 
 socket.on('gathering', function(data) {
+    var button = $('a[href="' + data.name + '"]');
+    button.html(button.data('label'));
+
     player.resources[data.name] = +data.value;
 
     updateCounter($('#resource-' + data.name), +data.value)
+});
+
+socket.on('clickCount', function(clickData) {
+    updateClickCount(clickData.resourceName, clickData.count);
+});
+
+socket.on('allClickCount', function(allClickData) {
+    for(var name in allClickData) {
+        updateClickCount(name, allClickData[name]);
+    }
 });
 
 socket.on('updateSkills', function(skills){

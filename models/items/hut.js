@@ -2,12 +2,13 @@ module.exports = {
     name: 'hut',
     label: 'Hutte',
     requiresValidation: true,
+    updateSkills: function(player) {
+        // @TODO
+    },
     getRequiredResources: function() {
         return {
             'wood': 100
         };
     },
-    getBuildingTime: function(player) {
-        return 1500 - 5 * player.skills.craftmanship;
-    }
+    clicks: 5000
 };

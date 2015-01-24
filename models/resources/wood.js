@@ -18,10 +18,7 @@ module.exports = {
             harvestedPerSecond *= 1.5;
         }
 
-        return harvestedPerSecond * this.getHarvestingTime(player) / 1000;
+        return harvestedPerSecond;
     },
-
-    getHarvestingTime: function(player) {
-        return 2000;
-    }
+    clicks: 10 + Math.round(30 * Math.random())
 };

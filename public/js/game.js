@@ -13,6 +13,24 @@ $document.on('click', '#player-name', function(e) {
     });
 });
 
+$document.on('click', '.actions a', function(e) {
+    e.preventDefault();
+
+    socket.emit('harvest', $(this).attr('href'));
+});
+
+$document.on('click', '#eat', function(e) {
+    e.preventDefault();
+
+    socket.emit('eat', $(this).attr('href'));
+});
+
+$document.on('click', '.crafting a', function(e) {
+    e.preventDefault();
+
+    socket.emit('crafting', $(this).attr('href'));
+});
+
 displayFileIn('screens/main.html', $('#main-screen'), function() {
     updateButtonsStatus();
     handleTribeName();
