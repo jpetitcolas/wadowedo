@@ -7,7 +7,7 @@ module.exports = {
     },
     getRequiredResources: function() {
         return {
-            'wood': 100
+            'wood': 1000
         };
     },
     clicks: 5000

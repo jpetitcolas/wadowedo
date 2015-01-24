@@ -28,7 +28,8 @@ var Player = function(name, socket) {
 };
 
 Player.prototype.gather = function(resource) {
-    var me = this;
+    var me = this,
+        requiredResources;
 
     // Init currently crafting resource
     if (!me.tribe.currentCraftingClicks.resources.hasOwnProperty(resource.name)) {
@@ -36,6 +37,14 @@ Player.prototype.gather = function(resource) {
         if (this.tribe && resource.requiresValidation && !this.isChief && !this.isSubChief) {
             this.tribe.submitCreation(this, resource, 'actions');
             return this.sendNotification('La construction de l\'object "' + resource.label + '" requiert la valition des chefs de la tribu, la demande est partie.');
+        }
+
+        // Decrement tribe resources for this item
+        requiredResources = resource.getRequiredResources();
+
+        for (var type in requiredResources) {
+            me.tribe.resources[type] -= requiredResources[type];
+            me.tribe.emitToAll('building:resources', { name: type, value: me.tribe.resources[type] });
         }
 
         me.tribe.currentCraftingClicks.resources[resource.name] = 0;
@@ -81,14 +90,8 @@ Player.prototype.craft = function(item) {
 
         // Decrement tribe resources for this item
         requiredResources = item.getRequiredResources();
-
         for (var type in requiredResources) {
-            if (!requiredResources.hasOwnProperty(type)) {
-                continue;
-            }
-
             me.tribe.resources[type] -= requiredResources[type];
-
             me.tribe.emitToAll('building:resources', { name: type, value: me.tribe.resources[type] });
         }
     }

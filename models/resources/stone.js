@@ -20,5 +20,8 @@ module.exports = {
 
         return harvestedPerSecond;
     },
+    getRequiredResources: function() {
+        return {};
+    },
     clicks: 150 + Math.round(50 * Math.random())
 };
