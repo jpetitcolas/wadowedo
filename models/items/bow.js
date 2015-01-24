@@ -2,7 +2,7 @@ module.exports = {
     name: 'bow',
     getRequiredResources: function() {
         return {
-            'wood': 50
+            'wood': 20
         };
     },
     getBuildingTime: function(player) {

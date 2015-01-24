@@ -2,8 +2,8 @@ module.exports = {
     name: 'axe',
     getRequiredResources: function() {
         return {
-            'wood': 50,
-            'stone': 20
+            'wood': 25,
+            'stone': 5
         };
     },
     getBuildingTime: function(player) {
