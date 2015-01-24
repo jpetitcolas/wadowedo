@@ -58,7 +58,6 @@ socket.on('updateEnergy', function(energy){
 
 
 socket.on('updateNewItem', function(techno){
-    updateButtonsStatus();
     player.technologies[techno] =  1;
     updateTechnologiesButtonStatus();
 });

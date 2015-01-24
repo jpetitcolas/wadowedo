@@ -51,5 +51,5 @@ function updateTechnologiesButtonStatus() {
         
     });
 }
-
+updateTechnologiesButtonStatus();
 updateButtonsStatus();
