@@ -41,19 +41,4 @@ displayFileIn('chat.html', $('#chat-container'), function() {
     initChat();
 });
 
-displayFileIn('actions.html', $('#actions-container'), function() {
-    $document.on('click', '.actions a', function(e) {
-        e.preventDefault();
-        socket.emit('harvest', $(this).attr('href'));
-    });
-
-    $document.on('click', '#eat', function(e) {
-        e.preventDefault();
-        socket.emit('eat', $(this).attr('href'));
-    });
-
-    $document.on('click', '.crafting a', function(e) {
-        e.preventDefault();
-        socket.emit('crafting', $(this).attr('href'));
-    });
-});
+displayFileIn('actions.html', $('#actions-container'));

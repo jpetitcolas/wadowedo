@@ -89,17 +89,22 @@ Player.prototype.craft = function(item) {
 
     // Init click count
     if (!me.clicks.hasOwnProperty(item.name)) {
-        me.clicks[resource.name] = 0;
+        me.clicks[item.name] = 0;
     }
 
     me.clicks[item.name]++;
-    me.tribe.currentCrafting[item.name].clicks++;
+    me.tribe.currentCraftingClicks.items[item.name]++;
 
-    if (me.tribe.currentCraftingClicks.items[resource.name] === resource.clicks) {
+    me.tribe.emitToAll('clickCount', {
+        resourceName: item.name,
+        count: item.clicks - me.tribe.currentCraftingClicks.items[item.name]
+    });
+
+    if (me.tribe.currentCraftingClicks.items[item.name] === item.clicks) {
         me.tribe.inventory[item.name]++;
         me.tribe.emitToAll('updateNewItem', item.name);
 
-        delete me.tribe.currentCraftingClicks.items[resource.name];
+        delete me.tribe.currentCraftingClicks.items[item.name];
     }
 };
 
