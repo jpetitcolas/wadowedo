@@ -12,9 +12,9 @@ module.exports = {
         player.skills.stoneCutting += totalHarvestedStone ? Math.log(totalHarvestedStone * 1.2) * config.skill.growth_factor : 0;
     },
 
-    getHarvestedValue: function(player) {
+    getHarvestedValue: function(player, tribe) {
         var harvestedPerSecond = 1 + player.skills.stoneCutting * config.skill.harvest_influence * 1.2;
-        if (player.inventory.pickaxe > 0) {
+        if (tribe.inventory.pickaxe > 0) {
             harvestedPerSecond *= 1.3;
         }
 

@@ -7,11 +7,18 @@ var Tribe = function(name) {
     this.subchiefs = [];
 
     this.resources = {
-        food: 50,
+        food: 0,
         wood: 0,
         stone: 0,
         gold: 0,
         soil: 0
+    };
+
+    this.inventory = {
+        axe: 0,
+        pickaxe: 0,
+        bow: 0,
+        knife:0
     };
 
     this.emitToAll = function(eventName, object) {
@@ -22,15 +29,6 @@ var Tribe = function(name) {
 
     this.addPlayer = function(currentPlayer) {
         currentPlayer.tribe = this;
-        // Transfer all player resources to the Tribe
-        for(var i in currentPlayer.resources) {
-            if (this.resources.hasOwnProperty(i)) {
-                this.resources[i] += currentPlayer.resources[i];
-            }
-        }
-
-        // Update player resource with tribe resource
-        this.transferResourcesToPlayer(currentPlayer);
 
         // Add player to the list
         this.players.push(currentPlayer);
@@ -67,12 +65,8 @@ var Tribe = function(name) {
 
         shouldDelete = this.players.length === 0;
 
-        // Player leaves, but other player are in the tribe: remove all resource for this player
-        if (removed && !shouldDelete) {
-            currentPlayer.clearResources();
+        if (removed) {
             currentPlayer.tribe = null;
-
-            currentPlayer.socket.emit('updateResources', currentPlayer.resources);
         }
 
         return shouldDelete;
@@ -126,19 +120,11 @@ var Tribe = function(name) {
         }
     };
 
-    this.transferResourcesToPlayer = function(currentPlayer) {
-        for(var i in this.resources) {
-            if (currentPlayer.resources.hasOwnProperty(i)) {
-                currentPlayer.resources[i] = this.resources[i];
-            }
-        }
-    };
-
     this.submitCrafting = function(player, item) {
         var leaders = this.subchiefs.concat(this.chief);
 
         for (var i in leaders) {
-            leaders[i].socket.emit('validateCrafting', {playerName: player.name, itemName: item.name});
+            leaders[i].socket.emit('validateCrafting', {playerName: player.name, itemName: item.name, itemLabel: item.label});
         }
     }
 };

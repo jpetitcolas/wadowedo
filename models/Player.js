@@ -1,9 +1,6 @@
 var Player = function(name, socket) {
     this.name = name;
     this.socket = socket;
-
-    this.health = 50;
-
     this.tribe = null;
     this.isChief = false;
     this.isSubChief = false;
@@ -11,14 +8,6 @@ var Player = function(name, socket) {
     this.totalHarvestedResources = {
         wood: 0,
         stone: 0
-    };
-
-    this.resources = {
-        food: 50,
-        wood: 0,
-        stone: 0,
-        gold: 0,
-        soil: 0
     };
 
     this.skills = {
@@ -32,19 +21,6 @@ var Player = function(name, socket) {
         cooking: 0,
         stoneCutting: 0
     };
-
-    this.inventory = {
-        axe: 0,
-        pickaxe: 0,
-        bow: 0,
-        knife:0
-    };
-};
-
-Player.prototype.clearResources = function() {
-    for(var i in this.resources) {
-        this.resources[i] = 0;
-    }
 };
 
 Player.prototype.gather = function(resource) {
@@ -56,22 +32,23 @@ Player.prototype.gather = function(resource) {
     setTimeout(function() {
         resource.updateSkills(me);
 
-        var harvestedValue = Math.round(resource.getHarvestedValue(me));
-        me.resources[resource.name] += harvestedValue;
+        var harvestedValue = Math.round(resource.getHarvestedValue(me, me.tribe));
+        me.tribe.resources[resource.name] += harvestedValue;
+
         if (me.totalHarvestedResources.hasOwnProperty(resource.name)) {
             me.totalHarvestedResources[resource.name] += harvestedValue;
         }
 
-        me.socket.emit('gathering', {name: resource.name, value: me.resources[resource.name]});
+        me.tribe.emitToAll('gathering', {name: resource.name, value: me.tribe.resources[resource.name]});
         me.socket.emit('updateSkills', me.skills);
     }, time);
 };
 
 Player.prototype.craft = function(item) {
     // Ask for a leader if the item requires a validation
-    if (this.tribe && item.requiresValidation && (!this.isChief || !this.isSubChief)) {
-        this.tribe.submitCrafting(player, item);
-        return this.sendNotification('La construction de cet object requiert la valition des chefs de la tribu, la demande est partie.');
+    if (this.tribe && item.requiresValidation && !this.isChief && !this.isSubChief) {
+        this.tribe.submitCrafting(this, item);
+        return this.sendNotification('La construction de l\'object "' + item.label + '" requiert la valition des chefs de la tribu, la demande est partie.');
     }
 
     var me = this,
@@ -83,8 +60,9 @@ Player.prototype.craft = function(item) {
         }
 
         me.resources[type] -= requiredResources[type];
-        me.socket.emit('building:resources', { name: type, value: me.resources[type] });
-        me.socket.emit('updateNewItem', item.name);
+
+        me.tribe.emitToAll('building:resources', { name: type, value: me.resources[type] });
+        me.tribe.emitToAll('updateNewItem', item.name);
     }
 
     setTimeout(function() {
@@ -96,7 +74,7 @@ Player.prototype.sendNotification = function(message) {
     this.socket.emit('chat:message', [{
         time: new Date().toISOString(),
         name: 'Wadowedo',
-        message: message
+        content: {to: 'all', text: message}
     }]);
 };
 

@@ -42,8 +42,6 @@ $document.on('click', '.crafting a', function(e) {
 
 displayFileIn('screens/main.html', $('#main-screen'), function() {
     updateButtonsStatus();
-});
-displayFileIn('navigation.html', $('#navigation'), function() {
     handleTribeName();
     $('#player-name').html(player.name);
 });

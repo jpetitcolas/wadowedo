@@ -62,12 +62,16 @@ socket.on('chat:message', function(messages) {
     for (var i = 0, c = messages.length; i < c; i++) {
         var message = messages[i];
 
-        if (message.content.to !== currentTab && (new Date()) - new Date(message.time) <= 5000) {
-            messageCounters[message.content.to]++;
-        }
+        addMessageToChat(message.content.to, '<p class="message"><strong>' + message.name + '</strong>: ' + message.content.text, message.time);
+    }
+});
 
-        chats[message.content.to].prepend('<p class="message"><strong>' + message.name + '</strong>: ' + message.content.text);
+function addMessageToChat(chat, message, time) {
+    if (chat !== currentTab && (new Date()) - new Date(time) <= 10000) {
+        messageCounters[chat]++;
     }
 
+    chats[chat].prepend(message);
+
     updateMessageCount();
-});
+}
