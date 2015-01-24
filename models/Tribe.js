@@ -1,6 +1,6 @@
 var Tribe = function(name) {
     this.name = name;
-
+    this.isDefaultTribe = false;
     this.players = [];
 
     this.chief = null;
