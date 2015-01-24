@@ -35,16 +35,6 @@ var Player = function(name, socket) {
         bow: 0,
         knife:0
     };
-
-    var self = this;
-
-    socket.on('harvest', function(resourceName){
-        self.gather(require('./resources/' + resourceName));
-    });
-
-    socket.on('crafting', function(objectName) {
-        self.craft(require('./items/' + objectName));
-    });
 };
 
 Player.prototype.clearResources = function() {

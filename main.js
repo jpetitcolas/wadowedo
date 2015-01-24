@@ -20,15 +20,25 @@ app.use(function *(next) {
             console.error(err);
         }
     }
-});
+})
 
 var hub = require('./lib/Hub')();
 var server = require('http').createServer(app.callback());
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
-    var player = new Player(socket.handshake.query.login, socket);
-    hub.register(player);
+    var login = socket.handshake.query.login;
+
+    var player = hub.getPlayerByLogin(login);
+    if (player) {
+        player.socket = socket;
+    } else {
+        player = new Player(login, socket);
+        hub.register(player);
+    }
+
+    hub.sendInitialData(player);
+    hub.addEventListeners(player);
 
     socket.on('chat:message', function(message) {
         hub.message(player, message);
