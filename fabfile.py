@@ -11,7 +11,7 @@ def build():
     with lcd("/tmp/%s/" % release):
         local("touch `git rev-parse --short HEAD`")
         local("bower install --production")
-        local("gulp build")
+        local("npm link gulp gulp-concat")
         local("tar -cf /tmp/%s.tgz --exclude=.git --gzip ." % (release))
 
     return release
