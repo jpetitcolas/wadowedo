@@ -4,6 +4,7 @@
     <title>Wadowedo</title>
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/style.css" rel="stylesheet">
+    <link href="/ladda-themeless.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container-fluid">
@@ -42,9 +43,10 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="container-fluid actions">
-                    <a class="btn btn-default" href="harvest-wood" role="button" id="harvest-wood">Récolter du bois</a>
-                    <a class="btn btn-default" href="harvest-stone"  id="harvest-stone" role="button">Récolter de la pierre</a>
-                    <a class="btn btn-default" href="hunt" data-skills="longbow,knife"  id="harvest-wood"role="button">Chasser</a>
+                    <a class="btn btn-primary ladda-button" href="harvest-wood" data-style="expand-left" data-size="l" role="button" id="harvest-wood" data-style="expand-left"  data-size="l" >Récolter du bois</a>
+                    <a class="btn btn-primary ladda-button" href="harvest-wood" role="button" id="harvest-wood" data-style="expand-left"  data-size="l" >Récolter du bois</a>
+                    <a class="btn btn-primary ladda-button" href="harvest-stone" data-style="expand-left" data-size="l" id="harvest-stone" role="button">Récolter de la pierre</a>
+                    <a class="btn btn-primary ladda-button" href="hunt" data-style="expand-left" data-size="l" data-skills="longbow,knife"  id="hunt" role="button"><span class="ladda-label">Chasser</span></a>
                 </div>
             </div>
             <div class="col-md-3 chat">
@@ -59,6 +61,8 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/js/spin.min.js"></script>
+    <script src="/js/ladda.min.js"></script>
     <script src="/js/game.js"></script>
 </body>
 </html>
