@@ -3,11 +3,20 @@ var socket = io('', { query: window.location.search.substring(1) }),
         skills: {},
         inventory: {}
     };
-
+var disableButtons = function() {
+    $('.actions a').attr('disabled',true);
+};
+var enableButtons = function() {
+    $('.actions a').attr('disabled',false);
+};
+var inprogress;
 function addButtonEvents () {
     $('.actions a').click(function(e) {
         e.preventDefault();
-
+        disableButtons();
+        inprogress = Ladda.create(this);
+        inprogress.start();
+        enableButtons();
         socket.emit('harvest', $(this).attr('href'));
     });
 
@@ -18,12 +27,7 @@ function addButtonEvents () {
     });
 }
 
-var disableButtons = function() {
-    $('.actions a').attr('disabled',true);
-};
-var enableButtons = function() {
-    $('.actions a').attr('disabled',false);
-};
+
 
 displayFileIn('screens/main.html', $('#main-screen'), function() {
     addButtonEvents();

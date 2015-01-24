@@ -16,7 +16,8 @@ var player = {
             value: +counter.innerHTML
         });
 
-        od.update(data.value);
+        inprogress.stop();
+        //od.update(data.value);
         updateButtonsStatus();
     });
 });
@@ -37,5 +38,6 @@ socket.on('skills', function(skills){
         });
 
         od.update(skills[skillName]);
+
     }
 });
