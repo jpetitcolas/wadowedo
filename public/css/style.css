@@ -52,11 +52,11 @@ body > .container-fluid {
     margin-left: 20px;
 }
 
-.crafting .btn-primary {
+#actions-container .crafting .panel-body .btn-primary {
     background-color: #DA561B;
     border-color: #DA561B;
 }
-.actions .btn-primary {
+#actions-container .actions .panel-body .btn-primary {
     background-color: #199CDA;
     border-color: #199CDA;
 }
