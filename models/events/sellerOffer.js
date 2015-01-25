@@ -4,8 +4,8 @@ module.exports = function() {
         description:    "<p>Un marchand s'approche. Il vous propose de vous échanger 50 unités de nourriture contre 100 unités de bois." +
                         "<p>Que faire ?</p>",
         choices: [
-            { label: "Accepter", action: "accept", votes: 0 },
-            { label: "Refuser", action: "deny", votes: 0 }
+            { label: "Refuser", action: "deny", votes: 0 },
+            { label: "Accepter", action: "accept", votes: 0 }
         ],
         accept: function(tribe) {
             if (tribe.resources.wood < 50) {
@@ -23,6 +23,7 @@ module.exports = function() {
 var acceptAction = function(tribe) {
     tribe.resources.meat += 50;
     tribe.resources.wood -= 100;
+    tribe.emitToAll('update:allResources', tribe.resources);
 
     return "<p>Vous récupérez 50 unités de nourriture et perdez 100 unités de bois.</p>";
 };
@@ -34,4 +35,3 @@ var cannotAcceptAction = function() {
 var denyAction = function() {
     return "<p>Le marchand n'est pas content et promet que vous allez le regretter...</p>";
 };
-

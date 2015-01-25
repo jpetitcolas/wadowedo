@@ -23,6 +23,8 @@ module.exports = function() {
 
 var hideAction = function(tribe) {
     tribe.resources.meat -= (tribe.resources.meat * 15 / 100);
+    tribe.emitToAll('update:allResources', tribe.resources);
+
     return "<p>Vous choisissez quelques volontaires pour jeter de la viande aux loups, afin de détourner leur attention " +
         "pendant que vos concitoyens se cachent. Vous perdez <strong>50 unités de nourritures</strong>.</p>";
 };
@@ -41,6 +43,7 @@ var attackAction = function(tribe) {
 var successAttackAction = function(tribe) {
     var hitPoints = Math.round(Math.random() * 50 % 50);
     tribe.setHealth(tribe.health - hitPoints);
+    tribe.emitToAll('updateHealth', tribe.health);
     return "<p>La bataille tourne en votre défaveur. Les pertes sont supérieures à vos victimes. Vous subissez " +
         "<strong>" + hitPoints + " points de dégâts</strong>.";
 };
@@ -48,6 +51,8 @@ var successAttackAction = function(tribe) {
 var defeatAttackAction = function(tribe) {
     var earnedFood = Math.round(Math.random() * 100 % 100);
     tribe.resources.meat += earnedFood;
+
+    tribe.emitToAll('update:allResources', tribe.resources);
     return "Vos valeureux chasseurs ont triomphés de vos féroces adversaires. Vous récoltez <strong>" + earnedFood
         + " unités de nourriture</strong>.";
 };
