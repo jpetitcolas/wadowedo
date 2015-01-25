@@ -1,4 +1,5 @@
 body {
+    overflow-x:hidden;
     background:url(/img/sky-min.jpg) no-repeat 50% 50%; background-size:content;
 }
 body > .container-fluid {
