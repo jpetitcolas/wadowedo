@@ -1,7 +1,7 @@
 var player = {
     health:{},
     skills: {},
-    inventory: {},
+    buildings: {},
     technologies: {},
     resources: {},
     tribeName: null,
@@ -15,6 +15,7 @@ function updateCounter(counter, value) {
         value: +counter[0].innerHTML
     });
     od.update(value);
+
     updateButtonsStatus();
 }
 
@@ -35,9 +36,10 @@ socket.on('building:resources', function(data) {
     var button = $('a[href="' + data.name + '"]');
     button.html(button.data('label'));
 
-    player.inventory[data.name] = +data.value;
+    player.resources[data.name] = +data.value;
 
-    updateCounter($('#resource-' + data.name), +data.value)
+    updateCounter($('#resource-' + data.name), +data.value);
+    updateButtonsStatus();
 });
 
 socket.on('gathering', function(data) {
@@ -46,7 +48,8 @@ socket.on('gathering', function(data) {
 
     player.resources[data.name] = +data.value;
 
-    updateCounter($('#resource-' + data.name), +data.value)
+    updateCounter($('#resource-' + data.name), +data.value);
+    updateButtonsStatus();
 });
 
 socket.on('clickCount', function(clickData) {
@@ -77,6 +80,8 @@ socket.on('updateSkills', function(skills){
 
         od.update(skills[skillName]);
     }
+
+    updateButtonsStatus();
 });
 
 
@@ -108,18 +113,22 @@ socket.on('updateResources', function(resources) {
 
         od.update(resources[resourceName]);
     }
+
+    updateButtonsStatus();
 });
 
-socket.on('updateInventory', function(inventory) {
-    $("#tools span").each(function(index, itemCount) {
-        if (!inventory.hasOwnProperty(itemCount.id)) {
+socket.on('updateBuildings', function(buildings) {
+    $('#tools span').each(function(index, itemCount) {
+        if (!buildings.hasOwnProperty(itemCount.id)) {
             return;
         }
 
-        $(this).text(inventory[itemCount.id]);
+        $(this).text(buildings[itemCount.id]);
     });
+
+    updateButtonsStatus();
 });
 
 socket.on('updateHealth', function(health) {
-    $(".progress-bar-energy").css("width", health + "%");
+    $('.progress-bar-energy').css('width', health + '%');
 });

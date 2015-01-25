@@ -108,7 +108,7 @@ Player.prototype.craft = function(item) {
     });
 
     if (me.tribe.currentCraftingClicks.items[item.name] === item.clicks) {
-        me.tribe.inventory[item.name]++;
+        me.tribe.buildings[item.name]++;
         me.tribe.emitToAll('updateNewItem', item.name);
 
         delete me.tribe.currentCraftingClicks.items[item.name];

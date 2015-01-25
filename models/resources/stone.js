@@ -14,7 +14,7 @@ module.exports = {
 
     getHarvestedValue: function(player, tribe) {
         var harvestedPerSecond = 1 + player.skills.stoneCutting * config.skill.harvest_influence * 1.2;
-        if (tribe.inventory.pickaxe > 0) {
+        if (tribe.technologies.pickaxe > 0) {
             harvestedPerSecond *= 1.3;
         }
 

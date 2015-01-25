@@ -1,5 +1,5 @@
 /**
- * enable/disable buttons with a data-skills & data-inventory
+ * enable/disable buttons with a data-enabled
  */
 var disableButtons = function() {
     $('.actions a').attr('disabled',true);
@@ -17,7 +17,7 @@ function haveCapabilities(capabilities) {
     var playerCapabilities = {
         resources: player.resources,
         skills: player.skills,
-        inventory: player.inventory,
+        buildings: player.buildings,
         technologies: player.technologies
     };
 
@@ -33,14 +33,14 @@ function haveCapabilities(capabilities) {
 function updateButtonsStatus() {
     enableButtons();
 
-    function updateButtonStatus($button) {
-        var enabled = haveCapabilities($button.data('enabled'));
-
-        $button.attr('disabled', enabled ? null: 'disabled');
-    }
+    var $button,
+        enabled;
 
     $('[data-enabled]').each(function(index, button) {
-        updateButtonStatus($(button));
+        $button = $(button);
+        enabled = haveCapabilities($button.data('enabled'));
+
+        $button.attr('disabled', enabled ? null: 'disabled');
     });
 }
 
