@@ -1,7 +1,7 @@
 module.exports = {
     name: 'berries',
     resource: 'meat',
-    updateSkills: function(player) {
+    update: function(player) {
     },
     getHarvestedValue: function(player, tribe) {
         return 1;

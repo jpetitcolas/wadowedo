@@ -61,6 +61,8 @@ Player.prototype.create = function(item, type) {
         count: item.clicks - me.tribe.currentCraftingClicks[type][item.name]
     });
 
+    item.update(me);
+
     // Update all tribe player skills
     if (me.tribe.currentCraftingClicks[type][item.name] === item.clicks) {
         me.tribe[type][item.resource] += Math.round(item.getHarvestedValue(me, me.tribe));
