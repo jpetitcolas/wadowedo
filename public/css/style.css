@@ -71,3 +71,11 @@ body > .container-fluid {
     font-size: 3rem;
 }
 
+#vote-success {
+    margin: 0 15px 15px;
+}
+
+.actions .panel-body > div, .crafting .panel-body > div {
+    float: left;
+    margin-right: 4px;
+}

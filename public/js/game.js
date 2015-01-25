@@ -46,5 +46,6 @@ $(window).on('load', function() {
 
     displayFileIn('actions.html', $('#actions-container'), function() {
         updateButtonsStatus();
+        $('[data-toggle="tooltip"]').tooltip();
     });
 });

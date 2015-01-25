@@ -3,6 +3,7 @@ var concat = require('gulp-concat');
 
 function buildScripts() {
     gulp.src([
+        './public/bower_components/bootstrap/js/tooltip.js',
         './public/js/spin.min.js',
         './public/js/ladda.min.js',
         './public/js/routing.js',
