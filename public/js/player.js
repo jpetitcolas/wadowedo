@@ -1,5 +1,5 @@
 var player = {
-    health:{},
+    health: 100,
     skills: {},
     buildings: {},
     technologies: {},
@@ -32,6 +32,31 @@ function updateClickCount(name, value) {
     button.html( button.data('label') + ' (' + value + ')');
 }
 
+player.isHealthy = function() {
+    return player.health > 0;
+};
+
+function updatePlayerCounts(counts, type) {
+    var counter,
+        name;
+
+    for(name in counts) {
+        counter = $('#' + type + '-' + name)[0];
+        if (!counter) {
+            continue;
+        }
+
+        od = new Odometer({
+            el: counter,
+            value: +counter.innerHTML
+        });
+
+        od.update(counts[name]);
+    }
+
+    updateButtonsStatus();
+}
+
 socket.on('building:resources', function(data) {
     var button = $('a[href="' + data.name + '"]');
     button.html(button.data('label'));
@@ -62,29 +87,6 @@ socket.on('allClickCount', function(allClickData) {
     }
 });
 
-socket.on('updateSkills', function(skills){
-    var skillName,
-        skillCounter;
-
-    player.skills = skills;
-    updateButtonsStatus();
-
-    for(skillName in skills) {
-        skillCounter = $('#skill-' + skillName)[0];
-
-        od = new Odometer({
-            el: skillCounter,
-            value: +skillCounter.innerHTML,
-            format: '(,ddd)'
-        });
-
-        od.update(skills[skillName]);
-    }
-
-    updateButtonsStatus();
-});
-
-
 socket.on('updateEnergy', function(energy){
     player.health['energy'] = energy;
 
@@ -94,27 +96,20 @@ socket.on('updateNewItem', function(techno){
     var button = $('a[href="' + techno + '"]');
     button.html(button.data('label'));
 
-    player.technologies[techno] =  1;
+    player.technologies[techno] = 1;
     updateTechnologiesButtonStatus();
 });
 
 socket.on('updateResources', function(resources) {
-    var resourceCounter;
-
     player.resources = resources;
-    updateButtonsStatus();
 
-    for(resourceName in resources) {
-        resourceCounter = $('#resource-' + resourceName)[0];
-        od = new Odometer({
-            el: resourceCounter,
-            value: +resourceCounter.innerHTML
-        });
+    updatePlayerCounts(player.resources, 'resource');
+});
 
-        od.update(resources[resourceName]);
-    }
+socket.on('updateSkills', function(skills){
+    player.skills = skills;
 
-    updateButtonsStatus();
+    updatePlayerCounts(player.skills, 'skill');
 });
 
 socket.on('updateBuildings', function(buildings) {
@@ -130,5 +125,6 @@ socket.on('updateBuildings', function(buildings) {
 });
 
 socket.on('updateHealth', function(health) {
-    $('.progress-bar-energy').css('width', health + '%');
+    $("#no-more-energy")[health <= 0 ? "show" : "hide"]();
+    $(".progress-bar-energy").css("width", health + "%");
 });

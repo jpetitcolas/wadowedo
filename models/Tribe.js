@@ -6,7 +6,7 @@ var Tribe = function(name) {
     this.chief = null;
     this.subchiefs = [];
 
-    this.health = 50;
+    this.health = 100;
     this.resources = {
         meat: 0,
         wood: 0,
@@ -15,7 +15,7 @@ var Tribe = function(name) {
         soil: 0
     };
 
-    this.inventory = {
+    this.technologies = {
         axe: 0,
         pickaxe: 0,
         bow: 0,
