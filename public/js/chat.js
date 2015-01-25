@@ -69,6 +69,10 @@ socket.on('chat:message', function(messages) {
 });
 
 function addMessageToChat(chat, message, time) {
+    if (!chats.hasOwnProperty(chat)) {
+        return;
+    }
+    
     if (chat !== currentTab && (new Date()) - new Date(time) <= 10000) {
         messageCounters[chat]++;
     }
