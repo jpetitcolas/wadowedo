@@ -3,6 +3,9 @@ module.exports = {
     resource: 'axe',
     label: 'Hache',
     requiresValidation: false,
+    update: function(player) {
+
+    },
     getHarvestedValue: function() {
         return 1;
     },

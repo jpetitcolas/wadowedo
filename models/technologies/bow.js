@@ -3,6 +3,9 @@ module.exports = {
     resource: 'bow',
     label: 'Arc',
     requiresValidation: false,
+    update: function(player) {
+
+    },
     getHarvestedValue: function() {
         return 1;
     },

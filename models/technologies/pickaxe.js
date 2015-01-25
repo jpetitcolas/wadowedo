@@ -3,6 +3,9 @@ module.exports = {
     resource: 'pickaxe',
     label: 'Pioche',
     requiresValidation: false,
+    update: function(player) {
+
+    },
     getHarvestedValue: function() {
         return 1;
     },
