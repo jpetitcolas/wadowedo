@@ -1,15 +1,19 @@
 module.exports = {
-    name: 'pickaxe',
-    label: 'Pioche',
+    name: 'axe',
+    resource: 'axe',
+    label: 'Hache',
     requiresValidation: false,
+    getHarvestedValue: function() {
+        return 1;
+    },
     updateSkills: function(player) {
         // @TODO
     },
     getRequiredResources: function() {
         return {
             'wood': 25,
-            'stone': 125
+            'stone': 5
         };
     },
-    clicks: 150
+    clicks: 200
 };

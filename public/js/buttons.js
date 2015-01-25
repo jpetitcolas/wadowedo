@@ -34,25 +34,38 @@ function updateButtonsStatus() {
     enableButtons();
 
     var $button,
+        label,
         enabled;
 
     $('[data-enabled]').each(function(index, button) {
         $button = $(button);
+        label = !!$button.data('label');
+
+        // If we have a label, the button was already clicked, do not disable it
+        if (label) {
+            return $button.attr('disabled', null);
+        }
+
         enabled = haveCapabilities($button.data('enabled'));
 
         $button.attr('disabled', enabled ? null: 'disabled');
     });
+
+    updateTechnologiesButtonStatus();
 }
 
 function updateTechnologiesButtonStatus() {
     $(".crafting .btn").each(function() {
         var $button = $(this),
+            name = $button.attr('href'),
             hasCapability = haveCapabilities($button.data('enabled'));
 
-        if (hasCapability && player.technologies.hasOwnProperty($button.attr('href'))) {
+        if (player.technologies.hasOwnProperty(name) && player.technologies[name]) {
             $button.attr('disabled', true).addClass('learned');
-        } else {
+        } else if (hasCapability) {
             $button.attr('disabled', false);
+        } else {
+            $button.attr('disabled', true).addClass('learned');
         }
     });
 }

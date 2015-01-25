@@ -12,6 +12,17 @@ $document.on('click', '.actions a', function(e) {
     socket.emit('harvest', $(this).attr('href'));
 });
 
+$document.on('click', '.buildings a', function(e) {
+    e.preventDefault();
+
+    if (!player.isHealthy()) {
+        $(this).shake();
+        return false;
+    }
+
+    socket.emit('build', $(this).attr('href'));
+});
+
 $document.on('click', '#eat', function(e) {
     e.preventDefault();
     socket.emit('eat', $(this).attr('href'));
@@ -45,7 +56,10 @@ $(window).on('load', function() {
     });
 
     displayFileIn('actions.html', $('#actions-container'), function() {
+        updateAllClickCount();
         updateButtonsStatus();
+
         $('[data-toggle="tooltip"]').tooltip();
+        updateTechnologiesButtonStatus();
     });
 });
