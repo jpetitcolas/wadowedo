@@ -10,6 +10,10 @@ var enableButtons = function() {
 };
 
 function haveCapabilities(capabilities) {
+    if (player.resources === null) {
+        return false;
+    }
+
     var playerCapabilities = {
         resources: player.resources,
         skills: player.skills,
