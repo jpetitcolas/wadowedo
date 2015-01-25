@@ -8,7 +8,7 @@ var Tribe = function(name) {
 
     this.health = 50;
     this.resources = {
-        food: 0,
+        meat: 0,
         wood: 0,
         stone: 0,
         gold: 0,
