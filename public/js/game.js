@@ -47,6 +47,7 @@ $(window).on('load', function() {
         updatePlayerCounts(player.skills, 'skill');
         updateButtonsStatus();
         handleTribeName();
+        displayPlayerHealth();
 
         $('#player-name').html(player.name);
     });

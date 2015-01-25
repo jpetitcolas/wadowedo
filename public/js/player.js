@@ -29,6 +29,11 @@ function updateAllClickCount() {
     }
 }
 
+function displayPlayerHealth() {
+    $("#no-more-energy")[player.health <= 0 ? "show" : "hide"]();
+    $(".progress-bar-energy").css("width", player.health + "%");
+}
+
 player.isHealthy = function() {
     return player.health > 0;
 };
@@ -135,6 +140,6 @@ socket.on('updateEnergy', function(energy){
 });
 
 socket.on('update:health', function(health) {
-    $("#no-more-energy")[health <= 0 ? "show" : "hide"]();
-    $(".progress-bar-energy").css("width", health + "%");
+    player.health = health;
+    displayPlayerHealth();
 });

@@ -1,9 +1,9 @@
 module.exports = {
     name: 'meat',
     resource: 'meat',
-    updateSkills: function(player) {
-        if (player.tribe.health <= 95) {
-            player.tribe.health += 5;
+    update: function(player) {
+        if (player.tribe.health <= 99.9) {
+            player.tribe.health += 0.1;
         } else {
             player.tribe.health = 100;
         }
