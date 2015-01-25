@@ -24,37 +24,14 @@ var Tribe = function(name) {
 
     this.currentCraftingClicks = {
         resources: {},
-        items: {}
+        buildings: {},
+        items: {},
+        technologies: {}
     };
 
     this.emitToAll = function(eventName, object) {
         for (var i in this.players) {
             this.players[i].socket.emit(eventName, object);
-        }
-    };
-
-    this.sendSkills = function(resource) {
-        var player,
-            nbPlayerClicks,
-            nbTotalClicks,
-            harvestedValue;
-
-        for (var i in this.players) {
-            player = this.players[i];
-            if(!player.clicks.hasOwnProperty(resource.name)) {
-                continue;
-            }
-
-            nbPlayerClicks = player.clicks[resource.name];
-            nbTotalClicks = this.currentCraftingClicks[resource.name];
-            harvestedValue = Math.round(resource.getHarvestedValue(player, player.tribe));
-
-            resource.updateSkills(player, nbPlayerClicks);
-            if (player.totalHarvestedResources.hasOwnProperty(resource.name)) {
-                player.totalHarvestedResources[resource.name] += harvestedValue * nbPlayerClicks / nbTotalClicks;
-            }
-
-            player.socket.emit('updateSkills', player.skills);
         }
     };
 
@@ -176,7 +153,7 @@ var Tribe = function(name) {
 
     this.setHealth = function(health) {
         this.health = health;
-        this.emitToAll('updateHealth', health);
+        this.emitToAll('update:health', health);
     };
 };
 

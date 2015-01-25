@@ -25,73 +25,27 @@ var Player = function(name, socket) {
     this.clicks = {};
 };
 
-Player.prototype.gather = function(resource) {
+Player.prototype.create = function(item, type) {
     var me = this,
         requiredResources;
 
     // Init currently crafting resource
-    if (!me.tribe.currentCraftingClicks.resources.hasOwnProperty(resource.name)) {
-        // Ask for a leader if the item requires a validation
-        if (this.tribe && resource.requiresValidation && !this.isChief && !this.isSubChief) {
-            this.tribe.submitCreation(this, resource, 'actions');
-            return this.sendNotification('La construction de l\'object "' + resource.label + '" requiert la valition des chefs de la tribu, la demande est partie.');
-        }
-
-        // Decrement tribe resources for this item
-        requiredResources = resource.getRequiredResources();
-
-        for (var type in requiredResources) {
-            me.tribe.resources[type] -= requiredResources[type];
-            me.tribe.emitToAll('building:resources', { name: type, value: me.tribe.resources[type] });
-        }
-
-        me.tribe.currentCraftingClicks.resources[resource.name] = 0;
-    }
-
-    // Init click count
-    if (!me.clicks.hasOwnProperty(resource.name)) {
-        me.clicks[resource.name] = 0;
-    }
-
-    me.clicks[resource.name]++;
-    me.tribe.currentCraftingClicks.resources[resource.name]++;
-
-    me.tribe.emitToAll('clickCount', {
-        resourceName: resource.name,
-        count: resource.clicks - me.tribe.currentCraftingClicks.resources[resource.name]
-    });
-
-    // Update all tribe player skills
-    if (me.tribe.currentCraftingClicks.resources[resource.name] === resource.clicks) {
-        me.tribe.resources[resource.name] += Math.round(resource.getHarvestedValue(me, me.tribe));
-
-        me.tribe.sendSkills(resource);
-        me.tribe.emitToAll('gathering', {name: resource.name, value: me.tribe.resources[resource.name]});
-
-        delete me.tribe.currentCraftingClicks.resources[resource.name];
-    }
-};
-
-Player.prototype.craft = function(item) {
-    var me = this,
-        requiredResources;
-
-    // Init currently crafting resource
-    if (!me.tribe.currentCraftingClicks.items.hasOwnProperty(item.name)) {
+    if (!me.tribe.currentCraftingClicks[type].hasOwnProperty(item.name)) {
         // Ask for a leader if the item requires a validation
         if (this.tribe && item.requiresValidation && !this.isChief && !this.isSubChief) {
-            this.tribe.submitCreation(this, item, 'crafting');
+            this.tribe.submitCreation(this, resource, 'actions');
             return this.sendNotification('La construction de l\'object "' + item.label + '" requiert la valition des chefs de la tribu, la demande est partie.');
         }
 
-        me.tribe.currentCraftingClicks.items[item.name] = 0;
-
         // Decrement tribe resources for this item
         requiredResources = item.getRequiredResources();
-        for (var type in requiredResources) {
-            me.tribe.resources[type] -= requiredResources[type];
-            me.tribe.emitToAll('building:resources', { name: type, value: me.tribe.resources[type] });
+
+        for (var requiredType in requiredResources) {
+            me.tribe.resources[requiredType] -= requiredResources[requiredType];
+            me.tribe.emitToAll('update:resources', { name: requiredType, value: me.tribe.resources[requiredType] });
         }
+
+        me.tribe.currentCraftingClicks[type][item.name] = 0;
     }
 
     // Init click count
@@ -100,21 +54,33 @@ Player.prototype.craft = function(item) {
     }
 
     me.clicks[item.name]++;
-    me.tribe.currentCraftingClicks.items[item.name]++;
+    me.tribe.currentCraftingClicks[type][item.name]++;
 
-    me.tribe.emitToAll('clickCount', {
+    me.tribe.emitToAll('update:clickCount', {
         resourceName: item.name,
-        count: item.clicks - me.tribe.currentCraftingClicks.items[item.name]
+        count: item.clicks - me.tribe.currentCraftingClicks[type][item.name]
     });
 
-    if (me.tribe.currentCraftingClicks.items[item.name] === item.clicks) {
-        if (typeof(me.tribe.technologies) != 'undefined') {
-            me.tribe.technologies[item.name]++;    
-        }
-        me.tribe.emitToAll('updateNewItem', item.name);
+    // Update all tribe player skills
+    if (me.tribe.currentCraftingClicks[type][item.name] === item.clicks) {
+        me.tribe[type][item.resource] += Math.round(item.getHarvestedValue(me, me.tribe));
 
-        delete me.tribe.currentCraftingClicks.items[item.name];
+        me.tribe.emitToAll('done:'+type, {name: item.name, type: item.resource, value: me.tribe[type][item.resource]});
+
+        delete me.tribe.currentCraftingClicks[type][item.name];
     }
+};
+
+Player.prototype.gather = function(resource) {
+    this.create(resource, 'resources');
+};
+
+Player.prototype.craft = function(technology) {
+    this.create(technology, 'technologies');
+};
+
+Player.prototype.build = function(item) {
+    this.create(item, 'buildings');
 };
 
 Player.prototype.sendNotification = function(message) {

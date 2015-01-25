@@ -72,3 +72,16 @@ body > .container-fluid {
     font-size: 3rem;
 }
 
+#vote-success {
+    margin: 0 15px 15px;
+}
+
+.button-wrapper {
+    float: left;
+    margin-right: 4px;
+}
+
+div.clear {
+    clear: both;
+    margin-bottom: 5px;
+}

@@ -1,7 +1,11 @@
 module.exports = {
     name: 'hut',
+    resource: 'hut',
     label: 'Hutte',
     requiresValidation: true,
+    getHarvestedValue: function() {
+        return 1;
+    },
     updateSkills: function(player) {
         // @TODO
     },

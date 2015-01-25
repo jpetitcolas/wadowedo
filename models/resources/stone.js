@@ -2,6 +2,7 @@ var config = require('config');
 
 module.exports = {
     name: 'stone',
+    resource: 'stone',
     updateSkills: function(player) {
         if (!player.totalHarvestedResources.hasOwnProperty(this.name)) {
             console.warn('Unable to compute skill update for lumberjacking.');

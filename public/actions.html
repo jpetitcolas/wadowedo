@@ -4,22 +4,36 @@
         <h3 class="panel-title">Actions</h3>
     </div>
     <div class="panel-body">
-        <a class="btn btn-primary" href="meat" data-enabled="resources.meat>=5">Manger</a>
-        <a class="btn btn-primary" href="berries">Cueillir des fraises</a>
-        <a class="btn btn-primary" href="wood">Récolter du bois</a>
-        <a class="btn btn-primary" href="stone" id="harvest-stone">Récolter de la pierre</a>
-        <a class="btn btn-primary" href="meat" data-enabled="technologies.bow>=1||technologies.knife>=1">Chasser</a>
-        <a class="btn btn-primary" href="iron" data-enabled="technologies.pickaxe>=1">Miner du fer</a>
-        <a class="btn btn-primary" href="gold" data-enabled="technologies.pickaxe>=1">Miner de l'or</a>
+        <div>
+            <div class="button-wrapper"><a class="btn btn-primary" href="berries">Cueillir des fraises</a></div>
+            <div class="button-wrapper"><a class="btn btn-primary" href="meat" data-enabled="resources.meat>=1">Manger</a></div>
+            <div class="button-wrapper"><a class="btn btn-primary" href="wood">Récolter du bois</a></div>
+            <div class="button-wrapper"><a class="btn btn-primary" href="stone" id="harvest-stone">Récolter de la pierre</a></div>
+            <div class="button-wrapper" data-toggle="tooltip" data-placement="bottom" title="Nécessite un arc ou un couteau">
+                <a class="btn btn-primary" href="meat" data-enabled="technologies.bow>=1||technologies.knife>=1">Chasser</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div>
+            <div class="button-wrapper" data-toggle="tooltip" data-placement="bottom" title="Nécessite une pioche">
+                <a class="btn btn-primary" href="iron" data-enabled="technologies.pickaxe>=1">Miner du fer</a>
+            </div>
+            <div class="button-wrapper" data-toggle="tooltip" data-placement="bottom" title="Nécessite une pioche">
+                <a class="btn btn-primary" href="gold" data-enabled="technologies.pickaxe>=1">Miner de l'or</a>
+            </div>
+            <div class="clear"></div>
+        </div>
     </div>
 </div>
 
-<div class="panel panel-default actions">
+<div class="panel panel-default buildings">
     <div class="panel-heading">
         <h3 class="panel-title">Construire un bâtiment</h3>
     </div>
     <div class="panel-body">
-        <a class="btn btn-primary" href="hut" data-enabled="resources.wood>=1000">Hutte</a>
+        <div class="button-wrapper" data-toggle="tooltip" data-placement="bottom" title="Nécessite 1000 unités de bois">
+            <a class="btn btn-primary" href="hut" data-enabled="resources.wood>=1000">Hutte</a>
+        </div>
     </div>
 </div>
 
@@ -29,8 +43,14 @@
         <h3 class="panel-title">Technologies</h3>
     </div>
     <div class="panel-body">
-        <a class="btn btn-primary" href="axe" data-enabled="resources.wood>=25 && resources.stone>=5">Hache</a>
-        <a class="btn btn-primary" href="pickaxe" data-enabled="resources.wood>=25 && resources.stone >= 125">Pioche</a>
-        <a class="btn btn-primary" href="bow" data-enabled="resources.wood>=20">Arc</a>
+        <div class="button-wrapper" data-toggle="tooltip" data-placement="bottom" title="Nécessite 25 unités de bois et 5 unités de pierre">
+            <a class="btn btn-primary" href="axe" data-enabled="resources.wood>=25 && resources.stone>=5">Hache</a>
+        </div>
+        <div class="button-wrapper" data-toggle="tooltip" data-placement="bottom" title="Nécessite 25 unités de bois et 125 unités de pierre">
+            <a class="btn btn-primary" href="pickaxe" data-enabled="resources.wood>=25 && resources.stone >= 125">Pioche</a>
+        </div>
+        <div class="button-wrapper" data-toggle="tooltip" data-placement="bottom" title="Nécessite 20 unités de bois">
+            <a class="btn btn-primary" href="axe" data-enabled="resources.wood>=20">Arc</a>
+        </div>
     </div>
 </div>

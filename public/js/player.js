@@ -4,20 +4,11 @@ var player = {
     buildings: {},
     technologies: {},
     resources: {},
+    clicks: {},
     tribeName: null,
     isChief: false,
     isSubChief: false
 };
-
-function updateCounter(counter, value) {
-    od = new Odometer({
-        el: counter[0],
-        value: +counter[0].innerHTML
-    });
-    od.update(value);
-
-    updateButtonsStatus();
-}
 
 function updateClickCount(name, value) {
     if (!value) {
@@ -30,6 +21,12 @@ function updateClickCount(name, value) {
     }
 
     button.html( button.data('label') + ' (' + value + ')');
+}
+
+function updateAllClickCount() {
+    for(var name in player.clicks) {
+        updateClickCount(name, player.clicks[name]);
+    }
 }
 
 player.isHealthy = function() {
@@ -57,74 +54,87 @@ function updatePlayerCounts(counts, type) {
     updateButtonsStatus();
 }
 
-socket.on('building:resources', function(data) {
-    var button = $('a[href="' + data.name + '"]');
-    button.html(button.data('label'));
+socket.on('update:resources', function(resource) {
+    player.resources[resource.name] = resource.value;
 
-    player.resources[data.name] = +data.value;
-
-    updateCounter($('#resource-' + data.name), +data.value);
-    updateButtonsStatus();
+    updatePlayerCounts(player.resources, 'resource');
 });
 
-socket.on('gathering', function(data) {
-    var button = $('a[href="' + data.name + '"]');
-    button.html(button.data('label'));
-
-    player.resources[data.name] = +data.value;
-
-    updateCounter($('#resource-' + data.name), +data.value);
-    updateButtonsStatus();
-});
-
-socket.on('clickCount', function(clickData) {
-    updateClickCount(clickData.resourceName, clickData.count);
-});
-
-socket.on('allClickCount', function(allClickData) {
-    for(var name in allClickData) {
-        updateClickCount(name, allClickData[name]);
-    }
-});
-
-socket.on('updateEnergy', function(energy){
-    player.health['energy'] = energy;
-
-});
-
-socket.on('updateNewItem', function(techno){
-    var button = $('a[href="' + techno + '"]');
-    button.html(button.data('label'));
-
-    player.technologies[techno] = 1;
-    updateTechnologiesButtonStatus();
-});
-
-socket.on('updateResources', function(resources) {
+socket.on('update:allResources', function(resources) {
     player.resources = resources;
 
     updatePlayerCounts(player.resources, 'resource');
 });
 
-socket.on('updateSkills', function(skills){
-    player.skills = skills;
+socket.on('update:allBuildings', function(buildings) {
+    player.buildings = buildings;
 
-    updatePlayerCounts(player.skills, 'skill');
+    updatePlayerCounts(player.buildings, 'buildings');
 });
 
-socket.on('updateBuildings', function(buildings) {
-    $('#tools span').each(function(index, itemCount) {
-        if (!buildings.hasOwnProperty(itemCount.id)) {
-            return;
-        }
+socket.on('update:allSkills', function(skills) {
+    player.skills = skills;
 
-        $(this).text(buildings[itemCount.id]);
-    });
+    updatePlayerCounts(player.skills, 'skills');
+});
+socket.on('update:allTechnologies', function(technologies) {
+    player.technologies = technologies;
 
     updateButtonsStatus();
 });
 
-socket.on('updateHealth', function(health) {
+socket.on('done:resources', function(resource) {
+    player.resources[resource.type] = resource.value;
+
+    var button = $('a[href="' + resource.name + '"]');
+    button.html(button.data('label'));
+
+    updatePlayerCounts(player.resources, 'resource');
+});
+
+socket.on('done:skills', function(skill){
+    player.skills[skill.name] = skill.value;
+
+    var button = $('a[href="' + skills.name + '"]');
+    button.html(button.data('label'));
+
+    updatePlayerCounts(player.skills, 'skill');
+});
+
+socket.on('done:technologies', function(item){
+    player.technologies[item.name] = item.value;
+
+    var button = $('a[href="' + item.name + '"]');
+    button.html(button.data('label'));
+
+    updateButtonsStatus();
+    updateTechnologiesButtonStatus();
+});
+
+socket.on('done:buildings', function(building){
+    player.buildings[building.name] = building.value;
+
+    var button = $('a[href="' + item.name + '"]');
+    button.html(button.data('label'));
+
+    updatePlayerCounts(player.buildings, 'buildings');
+});
+
+socket.on('update:clickCount', function(clickData) {
+    updateClickCount(clickData.resourceName, clickData.count);
+});
+
+socket.on('update:allClickCount', function(allClickData) {
+    player.clicks = allClickData;
+
+    updateAllClickCount();
+});
+
+socket.on('updateEnergy', function(energy){
+    player.health['energy'] = energy;
+});
+
+socket.on('update:health', function(health) {
     $("#no-more-energy")[health <= 0 ? "show" : "hide"]();
     $(".progress-bar-energy").css("width", health + "%");
 });
