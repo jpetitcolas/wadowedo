@@ -6,7 +6,7 @@ module.exports = {
     getHarvestedValue: function() {
         return 1;
     },
-    updateSkills: function(player) {
+    update: function(player) {
         // @TODO
     },
     getRequiredResources: function() {
