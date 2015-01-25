@@ -36,6 +36,27 @@ player.isHealthy = function() {
     return player.health > 0;
 };
 
+function updatePlayerCounts(counts, type) {
+    var counter,
+        name;
+
+    for(name in counts) {
+        counter = $('#' + type + '-' + name)[0];
+        if (!counter) {
+            continue;
+        }
+
+        od = new Odometer({
+            el: counter,
+            value: +counter.innerHTML
+        });
+
+        od.update(counts[name]);
+    }
+
+    updateButtonsStatus();
+}
+
 socket.on('building:resources', function(data) {
     var button = $('a[href="' + data.name + '"]');
     button.html(button.data('label'));
@@ -102,22 +123,15 @@ socket.on('updateNewItem', function(techno){
 });
 
 socket.on('updateResources', function(resources) {
-    var resourceCounter;
-
     player.resources = resources;
-    updateButtonsStatus();
 
-    for(resourceName in resources) {
-        resourceCounter = $('#resource-' + resourceName)[0];
-        od = new Odometer({
-            el: resourceCounter,
-            value: +resourceCounter.innerHTML
-        });
+    updatePlayerCounts(player.resources, 'resource');
+});
 
-        od.update(resources[resourceName]);
-    }
+socket.on('updateSkills', function(skills){
+    player.skills = skills;
 
-    updateButtonsStatus();
+    updatePlayerCounts(player.skills, 'skill');
 });
 
 socket.on('updateBuildings', function(buildings) {
