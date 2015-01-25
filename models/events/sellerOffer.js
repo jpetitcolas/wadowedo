@@ -15,7 +15,7 @@ module.exports = function() {
             return acceptAction(tribe);
         },
         deny: function(tribe) {
-            return denyAction(tribe);
+            return denyAction();
         }
     }
 };
@@ -27,11 +27,11 @@ var acceptAction = function(tribe) {
     return "<p>Vous récupérez 50 unités de nourriture et perdez 100 unités de bois.</p>";
 };
 
-var cannotAcceptAction = function(tribe) {
+var cannotAcceptAction = function() {
     return "<p>N'essayez pas de feinter le marchand, vous ne possédez pas les resources nécessaires à l'échange.</p>";
 };
 
-var denyAction = function(tribe) {
-    return "<p>Le marchand n'est pas content et promets que vous allez le regretter...</p>";
+var denyAction = function() {
+    return "<p>Le marchand n'est pas content et promet que vous allez le regretter...</p>";
 };
 
