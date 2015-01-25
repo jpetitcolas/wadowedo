@@ -153,6 +153,8 @@ var Tribe = function(name) {
 
     this.setHealth = function(health) {
         this.health = health;
+        console.log('update:health', health);
+
         this.emitToAll('update:health', health);
     };
 };
