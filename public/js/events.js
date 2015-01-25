@@ -1,7 +1,6 @@
 var modal = $("#modal");
 
 var currentEvent = null;
-var voteSuccess = $("#vote-success");
 
 modal.on("click", "button[data-action]", function(e) {
     e.preventDefault();
@@ -10,13 +9,9 @@ modal.on("click", "button[data-action]", function(e) {
 
     var message = "<p><strong>" + currentEvent.name + " &dash; </strong> " + player.name + " a voté pour <em>" + $(this).text() + "</em></p>";
     addMessageToChat('votes', message, new Date());
-
-    voteSuccess.show();
 });
 
 socket.on('event', function(event) {
-    voteSuccess.hide();
-
     if (currentEvent) {
         // Trigger a single event
         return;
@@ -36,8 +31,6 @@ socket.on('event', function(event) {
 });
 
 socket.on('event:finished', function(result) {
-    voteSuccess.hide();
-
     var message = "<p><strong>" + currentEvent.name + " &dash; </strong> la tribu a fait son choix : <em>" + result.action.label + "</em>.</p>";
     addMessageToChat('votes', message, new Date());
 
