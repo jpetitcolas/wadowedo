@@ -34,7 +34,7 @@ Player.prototype.create = function(item, type) {
     if (!me.tribe.currentCraftingClicks[type].hasOwnProperty(item.name)) {
         // Ask for a leader if the item requires a validation
         if (this.tribe && item.requiresValidation && !this.isChief && !this.isSubChief) {
-            this.tribe.submitCreation(this, resource, 'actions');
+            this.tribe.submitCreation(this, item, 'actions');
             return this.sendNotification('La construction de l\'object "' + item.label + '" requiert la valition des chefs de la tribu, la demande est partie.');
         }
 
