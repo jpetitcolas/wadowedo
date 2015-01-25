@@ -1,15 +1,5 @@
 var tribesWithPlayers = {};
 
-$document.on('click', '.tribe-status', function() {
-    socket.emit('retrieveTribes');
-
-    displayFileIn('screens/tribe.html', $('#main-screen'), function() {
-        updateTribeList();
-        handleTribeName();
-        displayTribeMembers();
-    });
-});
-
 $document.on('submit', '#create-tribe', function(event) {
     event.preventDefault();
 

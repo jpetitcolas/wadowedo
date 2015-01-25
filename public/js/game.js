@@ -46,8 +46,11 @@ $(window).on('load', function() {
         updatePlayerCounts(player.resources, 'resource');
         updatePlayerCounts(player.skills, 'skill');
         updateButtonsStatus();
-        handleTribeName();
         displayPlayerHealth();
+
+        updateTribeList();
+        handleTribeName();
+        displayTribeMembers();
 
         $('#player-name').html(player.name);
     });

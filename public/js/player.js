@@ -130,14 +130,14 @@ socket.on('done:buildings', function(building){
 socket.on('update:clickCount', function(clickData) {
     updateClickCount(clickData.resourceName, clickData.count);
 
-    updateButtonsStatus
+    updateButtonsStatus();
 });
 
 socket.on('update:allClickCount', function(allClickData) {
     player.clicks = allClickData;
 
     updateAllClickCount();
-    updateButtonsStatus
+    updateButtonsStatus();
 });
 
 socket.on('updateEnergy', function(energy){
