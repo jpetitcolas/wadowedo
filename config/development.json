@@ -1,6 +1,6 @@
 {
   "events": {
-    "delay": 15000,
+    "delay": 15000000,
     "probability": 0.9,
     "voting_duration": 5000
   },
