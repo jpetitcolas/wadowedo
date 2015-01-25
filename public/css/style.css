@@ -75,7 +75,12 @@ body > .container-fluid {
     margin: 0 15px 15px;
 }
 
-.actions .panel-body > div, .crafting .panel-body > div {
+.button-wrapper {
     float: left;
     margin-right: 4px;
+}
+
+div.clear {
+    clear: both;
+    margin-bottom: 5px;
 }
