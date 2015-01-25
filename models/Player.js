@@ -19,7 +19,8 @@ var Player = function(name, socket) {
         lumberjacking: 0,
         architecting: 0,
         cooking: 0,
-        stoneCutting: 0
+        stoneCutting: 0,
+        mining: 0
     };
 
     this.clicks = {};
