@@ -13,6 +13,8 @@ module.exports = {
     },
 
     getHarvestedValue: function(player, tribe) {
+        return 1000;
+
         var harvestedPerSecond = 1 + player.skills.lumberjacking * config.skill.harvest_influence;
         if (tribe.inventory.axe > 0) {
             harvestedPerSecond *= 1.5;
@@ -23,5 +25,5 @@ module.exports = {
     getRequiredResources: function() {
         return {};
     },
-    clicks: 50 + Math.round(30 * Math.random())
+    clicks: 5 + Math.round(30 * Math.random())
 };

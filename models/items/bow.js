@@ -10,5 +10,5 @@ module.exports = {
             'wood': 20
         };
     },
-    clicks: 250
+    clicks: 20
 };
