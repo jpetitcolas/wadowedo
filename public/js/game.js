@@ -57,6 +57,7 @@ $(window).on('load', function() {
 
     displayFileIn('chat.html', $('#chat-container'), function() {
         initChat();
+        handleTribeName();
     });
 
     displayFileIn('actions.html', $('#actions-container'), function() {
