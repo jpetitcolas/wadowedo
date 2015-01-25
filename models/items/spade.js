@@ -2,7 +2,7 @@ module.exports = {
     name: 'spade',
     label: 'Bêche',
     requiresValidation: false,
-    updateSkills: function(player) {
+    update: function(player) {
         // @TODO
     },
     getRequiredResources: function() {

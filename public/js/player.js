@@ -61,6 +61,13 @@ function updatePlayerCounts(counts, type) {
     updateButtonsStatus();
 }
 
+function revertButtonLabel(name) {
+    var button = $('a[href="' + name+ '"]');
+
+    button.html(button.data('label'));
+    button.data('label', null);
+}
+
 socket.on('update:resources', function(resource) {
     player.resources[resource.name] = resource.value;
 
@@ -93,8 +100,7 @@ socket.on('update:allTechnologies', function(technologies) {
 socket.on('done:resources', function(resource) {
     player.resources[resource.type] = resource.value;
 
-    var button = $('a[href="' + resource.name + '"]');
-    button.html(button.data('label'));
+    revertButtonLabel(resource.name);
 
     updatePlayerCounts(player.resources, 'resource');
 });
@@ -102,8 +108,7 @@ socket.on('done:resources', function(resource) {
 socket.on('done:skills', function(skill){
     player.skills[skill.name] = skill.value;
 
-    var button = $('a[href="' + skills.name + '"]');
-    button.html(button.data('label'));
+    revertButtonLabel(skill.name);
 
     updatePlayerCounts(player.skills, 'skill');
 });
@@ -111,8 +116,7 @@ socket.on('done:skills', function(skill){
 socket.on('done:technologies', function(item){
     player.technologies[item.name] = item.value;
 
-    var button = $('a[href="' + item.name + '"]');
-    button.html(button.data('label'));
+    revertButtonLabel(item.name);
 
     updateButtonsStatus();
     updateTechnologiesButtonStatus();

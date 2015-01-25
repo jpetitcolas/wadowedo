@@ -3,7 +3,7 @@ var config = require('config');
 module.exports = {
     name: 'Or',
     resource: 'gold',
-    updateSkills: function(player) {
+    update: function(player) {
         if (!player.totalHarvestedResources.hasOwnProperty(this.name)) {
             console.warn('Unable to compute skill update for mining.');
             return;

@@ -9,14 +9,11 @@ module.exports = {
     getHarvestedValue: function() {
         return 1;
     },
-    updateSkills: function(player) {
-        // @TODO
-    },
     getRequiredResources: function() {
         return {
             'wood': 25,
             'stone': 5
         };
     },
-    clicks: 200
+    clicks: 20
 };

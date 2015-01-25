@@ -57,8 +57,14 @@ function updateButtonsStatus() {
 function updateTechnologiesButtonStatus() {
     $(".crafting .btn").each(function() {
         var $button = $(this),
+            label = !!$button.data('label'),
             name = $button.attr('href'),
             hasCapability = haveCapabilities($button.data('enabled'));
+
+        // If we have a label, the button was already clicked, do not disable it
+        if (label) {
+            return $button.attr('disabled', null);
+        }
 
         if (player.technologies.hasOwnProperty(name) && player.technologies[name]) {
             $button.attr('disabled', true).addClass('learned');

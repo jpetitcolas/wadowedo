@@ -9,9 +9,6 @@ module.exports = {
     getHarvestedValue: function() {
         return 1;
     },
-    updateSkills: function(player) {
-        // @TODO
-    },
     getRequiredResources: function() {
         return {
             'wood': 20
