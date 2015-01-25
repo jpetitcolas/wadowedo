@@ -87,28 +87,6 @@ socket.on('allClickCount', function(allClickData) {
     }
 });
 
-socket.on('updateSkills', function(skills){
-    var skillName,
-        skillCounter;
-
-    player.skills = skills;
-    updateButtonsStatus();
-
-    for(skillName in skills) {
-        skillCounter = $('#skill-' + skillName)[0];
-
-        od = new Odometer({
-            el: skillCounter,
-            value: +skillCounter.innerHTML,
-            format: '(,ddd)'
-        });
-
-        od.update(skills[skillName]);
-    }
-
-    updateButtonsStatus();
-});
-
 socket.on('updateEnergy', function(energy){
     player.health['energy'] = energy;
 
