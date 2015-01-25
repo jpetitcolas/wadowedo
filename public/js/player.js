@@ -1,5 +1,5 @@
 var player = {
-    health:{},
+    health: 100,
     skills: {},
     buildings: {},
     technologies: {},
@@ -31,6 +31,10 @@ function updateClickCount(name, value) {
 
     button.html( button.data('label') + ' (' + value + ')');
 }
+
+player.isHealthy = function() {
+    return player.health > 0;
+};
 
 socket.on('building:resources', function(data) {
     var button = $('a[href="' + data.name + '"]');
@@ -84,7 +88,6 @@ socket.on('updateSkills', function(skills){
     updateButtonsStatus();
 });
 
-
 socket.on('updateEnergy', function(energy){
     player.health['energy'] = energy;
 
@@ -130,5 +133,6 @@ socket.on('updateBuildings', function(buildings) {
 });
 
 socket.on('updateHealth', function(health) {
-    $('.progress-bar-energy').css('width', health + '%');
+    $("#no-more-energy")[health <= 0 ? "show" : "hide"]();
+    $(".progress-bar-energy").css("width", health + "%");
 });
