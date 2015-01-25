@@ -96,7 +96,7 @@ socket.on('updateNewItem', function(techno){
     var button = $('a[href="' + techno + '"]');
     button.html(button.data('label'));
 
-    player.technologies[techno] =  1;
+    player.technologies[techno] = 1;
     updateTechnologiesButtonStatus();
 });
 

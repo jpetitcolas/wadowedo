@@ -13,15 +13,17 @@ module.exports = {
     },
 
     getHarvestedValue: function(player, tribe) {
-        var harvestedPerSecond = 1 + player.skills.stoneCutting * config.skill.harvest_influence * 1.2;
+        var harvestedPerSecond = 10 + player.skills.stoneCutting * config.skill.harvest_influence * 1.2;
         if (tribe.technologies.pickaxe > 0) {
             harvestedPerSecond *= 1.3;
         }
 
         return harvestedPerSecond;
     },
+
     getRequiredResources: function() {
         return {};
     },
-    clicks: 150 + Math.round(50 * Math.random())
+
+    clicks: 30
 };

@@ -25,5 +25,5 @@ module.exports = {
     getRequiredResources: function() {
         return {};
     },
-    clicks: 5 + Math.round(30 * Math.random())
+    clicks: 10
 };

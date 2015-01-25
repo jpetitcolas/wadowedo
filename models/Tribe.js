@@ -15,7 +15,7 @@ var Tribe = function(name) {
         soil: 0
     };
 
-    this.inventory = {
+    this.technologies = {
         axe: 0,
         pickaxe: 0,
         bow: 0,

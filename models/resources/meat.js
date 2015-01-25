@@ -10,12 +10,10 @@ module.exports = {
         player.tribe.setHealth(player.tribe.health);
     },
     getHarvestedValue: function(player, tribe) {
-        return player.skills.hunting * 5 + tribe.technologies.bow * 15;
+        return (1 + (player.skills.hunting * 0.1) + tribe.technologies.bow * 1.3);
     },
     getRequiredResources: function() {
-        return {
-            meat: 5
-        };
+        return {};
     },
-    clicks: 1
+    clicks: 50
 };
