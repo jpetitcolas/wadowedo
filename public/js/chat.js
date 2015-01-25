@@ -13,7 +13,8 @@ function initChat() {
     messageCounters = {
         all: 0,
         tribe: 0,
-        validation: 0
+        validation: 0,
+        votes: 0
     };
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -30,7 +31,7 @@ function initChat() {
 function updateMessageCount() {
     var count;
 
-    ['all', 'tribe', 'validation'].forEach(function(type) {
+    Object.keys(chats).forEach(function(type) {
         count = messageCounters[type];
 
         if (messageCounters[type] === 0) {

@@ -1,3 +1,4 @@
 module.exports = {
-    wolfAttack: require('./wolfAttack')
+    wolfAttack: require('./wolfAttack'),
+    sellerOffer: require('./sellerOffer')
 };

@@ -66,7 +66,7 @@ function handleTribeName() {
         $('#choose-tribe').show();
     }
 
-    $('#chat-tabs a:last')[player.isChief || player.isSubChief ? 'show' : 'hide']();
+    $('#chat-tabs a:eq(2)')[player.isChief || player.isSubChief ? 'show' : 'hide']();
 }
 
 function displayTribeMembers() {
@@ -164,25 +164,25 @@ socket.on('joinTribeResult', function(tribeName) {
 socket.on('becomeChief', function() {
     player.isChief = true;
 
-    $('#chat-tabs a:last').show();
+    $('#chat-tabs a:eq(2)').show();
 });
 
 socket.on('becomeSubChief', function() {
     player.isSubChief = true;
 
-    $('#chat-tabs a:last').show();
+    $('#chat-tabs a:eq(2)').show();
 });
 
 socket.on('leaveChiefPosition', function() {
     player.isChief = false;
 
-    $('#chat-tabs a:last').hide();
+    $('#chat-tabs a:eq(2)').hide();
 });
 
 socket.on('leaveSubChiefPosition', function() {
     player.isSubChief = false;
 
-    $('#chat-tabs a:last').hide();
+    $('#chat-tabs a:eq(2)').hide();
 });
 
 socket.on('updateTribe', function(tributeData) {

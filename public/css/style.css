@@ -39,10 +39,10 @@ body > .container-fluid {
 
 .badge {
     min-width: 35px;
-    background-color: #009030;
+    background-color: #31B19D;
     transition:background 1s ease;
 }
-.badge.odometer-animating-up {background-color:#D72F82;}
+.badge.odometer-animating-up {background-color:#1FC772;}
 .health .jumbotron {
     padding: 15px;
 }
@@ -71,6 +71,3 @@ body > .container-fluid {
     font-size: 3rem;
 }
 
-#vote-success {
-    margin: 0 15px 15px;
-}
