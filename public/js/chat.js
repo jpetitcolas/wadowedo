@@ -6,7 +6,8 @@ function initChat() {
     chats = {
         all: $('#chat-all .chat-messages'),
         tribe: $('#chat-tribe .chat-messages'),
-        validation: $('#chat-validation .chat-messages')
+        validation: $('#chat-validation .chat-messages'),
+        votes: $('#chat-votes .chat-messages')
     };
 
     messageCounters = {

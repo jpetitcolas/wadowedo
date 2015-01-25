@@ -63,5 +63,9 @@ body > .container-fluid {
     background:url(/img/sky-min.jpg) no-repeat 50% 50%; background-size:content;
 }
 .login #login {
-    font-size:3rem;
+    font-size: 3rem;
+}
+
+#vote-success {
+    margin: 0 15px 15px;
 }
